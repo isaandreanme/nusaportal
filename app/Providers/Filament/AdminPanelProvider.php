@@ -36,6 +36,7 @@ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Awcodes\LightSwitch\Enums\Alignment;
 use EightyNine\Approvals\ApprovalPlugin;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Auth\EditProfile;
 use Hasnayeen\Themes\Http\Middleware\SetTheme;
 use Hasnayeen\Themes\ThemesPlugin;
@@ -136,6 +137,13 @@ class AdminPanelProvider extends PanelProvider
                     ->defaultColor(Color::Blue), // optional, by default it is set to "primary"
 
 
+            ])
+            ->navigationItems([
+                NavigationItem::make('Lihat Website')
+                    ->group('Settings')
+                    ->url('/', shouldOpenInNewTab: true)
+                    ->sort(-3)
+                    ->icon('heroicon-o-viewfinder-circle'),
             ])
             ->navigationGroups([
                 NavigationGroup::make()
