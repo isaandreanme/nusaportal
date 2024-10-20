@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Laporan CPMI</title>
+    <title>Laporan {{ env('COMPANY_NAME') }}</title>
     <style>
         body {
             font-family: sans-serif;
@@ -66,7 +66,7 @@
         </tr>
     </table>
 
-    <h1 align="center">Laporan PT P3MI</h1>
+    <h1 align="center">{{ env('COMPANY_NAME') }}</h1>
     <p align="center"><strong>Periode:</strong>
         {{ $start ? \Carbon\Carbon::parse($start)->format('d-m-Y') : 'Semua tanggal' }}
         s/d
