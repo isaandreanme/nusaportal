@@ -35,6 +35,7 @@ class PengalamanResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->label('ID'),
                 TextColumn::make('nama')->label('PENGALAMAN'),
             ])
             ->filters([

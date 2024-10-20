@@ -49,7 +49,7 @@ class AgencyResource extends Resource
                 TextColumn::make('nama')->label('NAMA AFENCY'),
                 TextColumn::make('penanggungjawab')->label('PENANGGUNG JAWAB'),
                 TextColumn::make('nomortelp')->label('NOMOR TELEPON'),
-                TextColumn::make('alamat')->label('ALAMAT'),
+                TextColumn::make('alamat')->label('ALAMAT'), 
             ])
             ->filters([
                 //

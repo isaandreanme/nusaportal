@@ -28,6 +28,10 @@ class SponsorResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nama')->required(),
+                TextInput::make('nomortelp')
+                    ->label('Nomor Telepon'),
+                TextInput::make('keterangan')
+                    ->label('Keterangan')
             ]);
     }
 
@@ -35,7 +39,10 @@ class SponsorResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->label('ID'),
                 TextColumn::make('nama')->label('SPONSOR-PL'),
+                TextColumn::make('nomortelp')->label('NOMOR TELEPON'),
+                TextColumn::make('keterangan')->label('Keterangan'),
             ])
             ->filters([
                 //

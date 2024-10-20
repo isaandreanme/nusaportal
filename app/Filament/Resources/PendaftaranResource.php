@@ -19,6 +19,7 @@ use App\Filament\Resources\PendaftaranResource\RelationManagers\ProsesCpmiRelati
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Regency;
+use App\Models\Sponsor;
 use App\Models\User;
 use App\Models\Village;
 use Filament\Forms\Components\Card;
@@ -139,8 +140,14 @@ class PendaftaranResource extends Resource
                                     ->optionsLimit(3)
                                     ->label('SPONSOR PL')
                                     ->createOptionForm([
-                                        Forms\Components\TextInput::make('nama')->unique()
+                                        TextInput::make('nama')->required()->unique(),
+                                        TextInput::make('nomortelp')
+                                            ->label('Nomor Telepon'),
+                                        TextInput::make('keterangan')
+                                            ->label('Keterangan')
+
                                     ])
+                                    ->getOptionLabelFromRecordUsing(fn(Sponsor $record) => "{$record->nama} - {$record->nomortelp} / {$record->keterangan}")
                                     ->required(),
                                 Select::make('pengalaman_id',)
                                     ->relationship('Pengalaman', 'nama')
