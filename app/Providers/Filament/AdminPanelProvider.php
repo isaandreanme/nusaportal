@@ -142,7 +142,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('Lihat Website')
                     ->group('Settings')
                     ->url('/', shouldOpenInNewTab: true)
-                    ->sort(-3)
+                    ->sort(30)
                     ->icon('heroicon-o-viewfinder-circle'),
             ])
             ->navigationGroups([
