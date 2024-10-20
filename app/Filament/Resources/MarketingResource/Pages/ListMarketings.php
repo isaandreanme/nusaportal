@@ -32,11 +32,11 @@ class ListMarketings extends ListRecords
     {
         return [
             'NON JOB' => Tab::make('NON JOB')
-                ->badge(Marketing::query()->where('get_job', '1')->count())
-                ->modifyQueryUsing(fn(Builder $query) => $query->where('get_job', '1')),
-            'DAPAT JOB' => Tab::make('DAPAT JOB')
                 ->badge(Marketing::query()->where('get_job', '0')->count())
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('get_job', '0')),
+            'DAPAT JOB' => Tab::make('DAPAT JOB')
+                ->badge(Marketing::query()->where('get_job', '1')->count())
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('get_job', '1')),
             'ALL BIODATA' => Tab::make('ALL BIODATA')
                 ->icon('heroicon-m-clipboard-document-list')
                 ->badge(Marketing::query()->count()),

@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('proses_cpmis', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Primary key
+            $table->unsignedBigInteger('pendaftaran_id'); // Foreign key to pendaftarans table
+
             $table->date('tanggal_pra_bpjs')->nullable();
             $table->date('tanggal_ujk')->nullable();
             $table->date('tglsiapkerja')->nullable();
@@ -42,6 +44,9 @@ return new class extends Migration
             $table->string('file_in_agency')->nullable();
 
             $table->timestamps(); // created_at and updated_at
+
+            // Foreign key constraint
+            $table->foreign('pendaftaran_id')->references('id')->on('pendaftarans')->onDelete('cascade');
         });
     }
 
@@ -50,6 +55,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('proses_cpmis', function (Blueprint $table) {
+            // Drop the foreign key constraint first
+            $table->dropForeign(['pendaftaran_id']);
+        });
+
         Schema::dropIfExists('proses_cpmis');
     }
 };

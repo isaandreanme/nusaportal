@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->softDeletes();
+            $table->softDeletes(); // Mengaktifkan soft delete
             $table->string('foto')->nullable();
             $table->string('code_hk')->nullable();
             $table->string('code_tw')->nullable();
@@ -27,10 +26,7 @@ return new class extends Migration
             $table->boolean('get_job')->default(false);
             $table->date('tgl_job')->nullable();
 
-
-
-            //---------------------------------------------------------------- Applicants Information Sheet 申請人資料
-
+            // Applicants Information Sheet
             $table->string('nama')->nullable();
             $table->string('national')->nullable();
             $table->enum('kelamin', ['MALE', 'FEMALE'])->nullable();
@@ -47,8 +43,7 @@ return new class extends Migration
             $table->string('son')->nullable();
             $table->string('daughter')->nullable();
 
-            //---------------------------------------------------------------- Working Experience 工作經驗
-
+            // Working Experience
             $table->enum('careofbabies', ['YES', 'NO'])->nullable();
             $table->enum('careoftoddler', ['YES', 'NO'])->nullable();
             $table->enum('careofchildren', ['YES', 'NO'])->nullable();
@@ -62,10 +57,7 @@ return new class extends Migration
             $table->enum('cooking', ['YES', 'NO'])->nullable();
             $table->enum('driving', ['YES', 'NO'])->nullable();
 
-
-            //---------------------------------------------------------------- Overseas Experience 海外工作經驗
-
-
+            // Overseas Experience
             $table->string('hongkong')->nullable();
             $table->string('singapore')->nullable();
             $table->string('taiwan')->nullable();
@@ -75,23 +67,18 @@ return new class extends Migration
             $table->string('other')->nullable();
             $table->string('homecountry')->nullable();
 
-            //---------------------------------------------------------------- Language Skills 語言能力
-
+            // Language Skills
             $table->enum('spokenenglish', ['POOR', 'FAIR', 'GOOD'])->nullable();
             $table->enum('spokencantonese', ['POOR', 'FAIR', 'GOOD'])->nullable();
             $table->enum('spokenmandarin', ['POOR', 'FAIR', 'GOOD'])->nullable();
 
-
-            //---------------------------------------------------------------- Remark 備註
-
+            // Remark
             $table->text('remark')->nullable();
 
-            //---------------------------------------------------------------- Previous Duties 過往工作
-
+            // Previous Duties
             $table->json('pengalaman')->nullable();
 
-            //---------------------------------------------------------------- Other Question 其他問題
-
+            // Other Questions
             $table->enum('babi', ['YES', 'NO'])->nullable();
             $table->enum('liburbukanhariminggu', ['YES', 'NO'])->nullable();
             $table->enum('berbagikamar', ['YES', 'NO'])->nullable();
@@ -101,17 +88,16 @@ return new class extends Migration
             $table->enum('pernahsakit', ['YES', 'NO'])->nullable();
             $table->string('ketsakit')->nullable();
 
-
-
-            //----------------------------------------------------------------RELASI
-
+            // Foreign Keys and Relations
             $table->unsignedBigInteger('tujuan_id')->nullable();
             $table->unsignedBigInteger('kantor_id')->nullable();
             $table->unsignedBigInteger('marketing_id')->nullable();
-            // $table->unsignedBigInteger('agency_id')->nullable();
-            // $table->unsignedBigInteger('sales_id')->nullable();
             $table->unsignedBigInteger('pengalaman_id')->nullable();
             $table->enum('dapatjob', ['YES', 'NO'])->nullable();
+
+            // Jika ingin menambahkan foreign key untuk pendaftaran_id
+            $table->unsignedBigInteger('pendaftaran_id')->nullable(); // Menambahkan kolom pendaftaran_id
+            $table->foreign('pendaftaran_id')->references('id')->on('pendaftarans')->onDelete('cascade'); // Foreign key dengan cascade delete
         });
     }
 
@@ -120,6 +106,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('marketings', function (Blueprint $table) {
+            // Hapus foreign key sebelum menghapus tabel
+            $table->dropForeign(['pendaftaran_id']);
+        });
         Schema::dropIfExists('marketings');
     }
 };

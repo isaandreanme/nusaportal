@@ -24,75 +24,80 @@ class MarketingSeeder extends Seeder
 
         // Mengambil semua data dari tabel Pendaftaran, ProsesCpmi, Sales, dan Agency
         $pendaftarans = Pendaftaran::all();
-        $prosesCpmis = ProsesCpmi::all();
+        $prosesCpmis = ProsesCpmi::with('status')->get(); // Mengambil relasi status dengan ProsesCpmi
         $sales = Sales::all();
         $agencies = Agency::all();
 
-        // Jika tabel Pendaftaran kosong, buat beberapa data dummy
+        // Pastikan tabel Pendaftaran, ProsesCpmi, Sales, dan Agency tidak kosong
         if ($pendaftarans->isEmpty()) {
             Pendaftaran::factory()->count(5)->create();
             $pendaftarans = Pendaftaran::all();
         }
 
-        // Jika tabel ProsesCpmi kosong, buat beberapa data dummy
         if ($prosesCpmis->isEmpty()) {
             ProsesCpmi::factory()->count(5)->create();
-            $prosesCpmis = ProsesCpmi::all();
+            $prosesCpmis = ProsesCpmi::with('status')->get(); // Mengambil relasi status lagi jika data baru
         }
 
-        // Jika tabel Sales kosong, tampilkan pesan error
         if ($sales->isEmpty()) {
             $this->command->error('Tidak ada data di tabel Sales. Harap tambahkan data Sales terlebih dahulu.');
             return;
         }
 
-        // Jika tabel Agency kosong, tampilkan pesan error
         if ($agencies->isEmpty()) {
             $this->command->error('Tidak ada data di tabel Agencies. Harap tambahkan data Agencies terlebih dahulu.');
             return;
         }
 
-        // Nama file gambar yang digunakan
+        // Memastikan direktori penyimpanan untuk foto ada
         $namaFile = 'contohfotomaids.jpg';
         $direktoriFoto = 'biodata/foto';
-
-        // Buat direktori penyimpanan jika belum ada
         Storage::disk('public')->makeDirectory($direktoriFoto);
         $pathAsli = public_path("images/$namaFile");
 
-        // Periksa apakah file gambar ada
+        // Pastikan file gambar ada
         if (!file_exists($pathAsli)) {
             $this->command->error("File gambar $namaFile tidak ditemukan di public/images.");
             return;
         }
 
-        // Salin file gambar ke direktori 'storage/public/biodata/foto'
+        // Salin file gambar ke direktori penyimpanan
         $pathTujuan = "$direktoriFoto/$namaFile";
         Storage::disk('public')->put($pathTujuan, file_get_contents($pathAsli));
 
-        // Iterasi melalui setiap data pendaftaran untuk membuat data Marketing
+        // Variabel untuk mengatur agency_id secara berurutan dalam rentang 3 hingga 12
+        $agencyIdCounter = 3; // Mulai dari 3
+
+        // Iterasi setiap pendaftaran dan buat data Marketing
         foreach ($pendaftarans as $pendaftaran) {
             $prosesCpmi = $prosesCpmis->random();
             $salesPerson = $sales->random();
-            $statusId = $prosesCpmi->status_id;
 
-            // Tentukan agency_id dan get_job berdasarkan status_id
-            if (in_array($statusId, [1, 2])) {
-                $agencyId = 2;
-            } elseif (in_array($statusId, [4, 5, 6])) {
-                $agencyId = 1;
-            } elseif ($statusId === 3) {
-                $availableAgencies = $agencies->whereNotIn('id', [1, 2]);
-                $agencyId = $availableAgencies->isNotEmpty() ? $availableAgencies->random()->id : null;
+            // Ambil nilai status_id dari relasi Status di ProsesCpmi
+            $statusId = $prosesCpmi->status->id;
 
-                // Jika tidak ada agency selain 1 dan 2, tampilkan pesan error
-                if (!$agencyId) {
-                    $this->command->error('Tidak ada agency selain 1 dan 2 yang tersedia.');
-                    return;
+            // Tentukan agency_id berdasarkan status_id tanpa acak
+            if ($statusId === 3) {
+                // Jika status_id adalah 3, tetapkan agency_id secara berurutan antara 3 hingga 12
+                $agencyId = $agencyIdCounter;
+
+                // Naikkan agencyIdCounter dan reset jika sudah mencapai 12
+                $agencyIdCounter++;
+                if ($agencyIdCounter > 12) {
+                    $agencyIdCounter = 3;
                 }
+            } elseif (in_array($statusId, [1, 4, 5, 6])) {
+                // Jika status_id adalah 1, 4, 5, atau 6, agency_id harus 1
+                $agencyId = 1;
+            } elseif ($statusId === 2) {
+                // Jika status_id adalah 2, agency_id harus 2
+                $agencyId = 2;
+            } else {
+                $this->command->error("Status ID tidak valid: $statusId.");
+                return;
             }
 
-            // Tentukan get_job berdasarkan status_id
+            // Set get_job true hanya jika status_id adalah 3
             $getJob = $statusId === 3;
 
             // Buat data Marketing
@@ -107,8 +112,8 @@ class MarketingSeeder extends Seeder
                 'code_sgp' => $faker->randomNumber(5, true),
                 'code_my' => $faker->randomNumber(5, true),
                 'nomor_hp' => $faker->phoneNumber,
-                'get_job' => $getJob,
-                'tgl_job' => $getJob ? Carbon::instance($faker->dateTimeBetween(now()->subMonths(6), now())) : null, // Set tgl_job with Carbon if get_job is true
+                'get_job' => $getJob, // Set get_job true hanya jika status_id == 3
+                'tgl_job' => $getJob ? Carbon::instance($faker->dateTimeBetween(now()->subMonths(6), now())) : null,
                 'national' => $faker->country,
                 'kelamin' => $faker->randomElement(['MALE', 'FEMALE']),
                 'lulusan' => $faker->randomElement(['Elementary School', 'Junior High School', 'Senior Highschool', 'University']),

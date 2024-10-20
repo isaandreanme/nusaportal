@@ -41,6 +41,7 @@ class KantorResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->label('ID'),
                 TextColumn::make('nama')->label('KANTOR'),
                 TextColumn::make('penanggungjawab')->label('PENANGGUNG JAWAB'),
                 TextColumn::make('nomortelp')->label('NOMOR TELEPON'),

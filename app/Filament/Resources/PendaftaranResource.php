@@ -369,6 +369,7 @@ class PendaftaranResource extends Resource
                     ->label('HASIL MEDICAL'),
                 TextColumn::make('ProsesCpmi.Status.nama')->label('STATUS')
                     ->badge()
+                    ->sortable()
                     ->color(fn(string $state): string => match ($state) {
                         'BARU' => 'warning',
                         'ON PROSES' => 'info',
@@ -390,6 +391,7 @@ class PendaftaranResource extends Resource
                     ->copyMessage('Salin Berhasil')
                     ->copyMessageDuration(1500),
                 TextColumn::make('Marketing.Agency.nama')
+                    ->sortable()
                     ->label('MARKET'),
 
             ])
