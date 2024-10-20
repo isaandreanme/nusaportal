@@ -45,6 +45,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 use Illuminate\Contracts\View\View;
 use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Tables\Columns\IconColumn;
 use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class PendaftaranResource extends Resource
@@ -137,7 +138,7 @@ class PendaftaranResource extends Resource
                                     ->searchable()
                                     ->required()
                                     ->preload()
-                                    ->optionsLimit(3)
+                                    ->optionsLimit(10)
                                     ->label('SPONSOR PL')
                                     ->createOptionForm([
                                         TextInput::make('nama')->required()->unique(),
@@ -347,7 +348,11 @@ class PendaftaranResource extends Resource
                 TextColumn::make('created_at')
                     ->label('DAFTAR')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->description(
+                        fn(Pendaftaran $record): string =>
+                        $record->sponsor ? "{$record->sponsor->nama}" : 'Sponsor Tidak Ditemukan'
+                    ),
                 TextColumn::make('nama')->label('NAMA')
                     ->searchable()
                     ->description(
@@ -374,6 +379,12 @@ class PendaftaranResource extends Resource
                     ->label('TGL MEDICAL'),
                 TextColumn::make('pra_medical')
                     ->label('HASIL MEDICAL'),
+                IconColumn::make('data_lengkap')
+                    ->boolean()
+                    ->sortable()
+                    ->trueColor('success')
+                    ->falseColor('danger')
+                    ->label('DOKUMEN')->toggleable(isToggledHiddenByDefault: true)->disabled(),
                 TextColumn::make('ProsesCpmi.Status.nama')->label('STATUS')
                     ->badge()
                     ->sortable()
