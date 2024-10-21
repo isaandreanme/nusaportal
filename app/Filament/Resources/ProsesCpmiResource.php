@@ -85,8 +85,8 @@ class ProsesCpmiResource extends Resource
                             ->relationship('Pendaftaran', 'nama')
                             ->getOptionLabelFromRecordUsing(fn(Pendaftaran $record) => "{$record->nama}")
                             ->label('Nama')
-                            ->searchable(),
-                        // ->disabled(),
+                            ->searchable()
+                            ->disabled(),
                         Select::make('pendaftaran_id',)
                             ->relationship('Pendaftaran', 'nomor_ktp')
                             ->getOptionLabelFromRecordUsing(fn(Pendaftaran $record) => "{$record->nomor_ktp}")

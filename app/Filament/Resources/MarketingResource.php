@@ -98,8 +98,8 @@ class MarketingResource extends Resource
                                         ->label('Nama')
                                         ->required()
                                         ->searchable()
-                                        ->optionsLimit(5),
-                                    // ->disabled(),
+                                        ->optionsLimit(5)
+                                        ->disabled(),
                                     TextInput::make('nomor_hp')
                                         ->numeric()
                                         ->minLength(1)
@@ -652,8 +652,8 @@ class MarketingResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('foto')
-                ->label('')
-                ->circular(),
+                    ->label('')
+                    ->circular(),
                 TextColumn::make('ProsesCpmi.Status.nama')->label('STATUS')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
@@ -741,6 +741,13 @@ class MarketingResource extends Resource
                     ->relationship('Tujuan', 'nama')
                     ->label('NEGARA TUJUAN')
                     ->placeholder('SEMUA'),
+                SelectFilter::make('Status')
+                    ->relationship('ProsesCpmi.Status', 'nama')
+                    ->label('STATUS')
+                    ->multiple()
+                    ->optionsLimit(6)
+                    ->preload()
+                    ->placeholder('Pilih Satu Atau Beberapa'),
             ], layout: FiltersLayout::Modal)
             ->filtersTriggerAction(
                 fn(Action $action) => $action
