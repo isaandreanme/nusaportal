@@ -7,6 +7,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title class="notranslate" translate="no">{{ env('COMPANY_NAME') }}</title>
 
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Perusahaan Penempatan Pekerja Migran Indonesia.">
+    <meta name="keywords" content="pekerja migran, tenaga kerja, penempatan kerja, luar negeri, BP2MI, kemnaker, agency, pjtki,">
+    <meta name="author" content="{{ env('COMPANY_NAME') }}">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="{{ env('COMPANY_NAME') }}">
+    <meta property="og:description" content="Kami menyediakan tenaga kerja berkualitas untuk bekerja di luar negeri.">
+    <meta property="og:image" content="/images/logo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+
     <!-- Favicon -->
     <link rel="icon" href="/images/favicon.svg" type="image/x-icon">
 
@@ -333,7 +344,7 @@
             <div class="flex items-center">
                 <img src="/images/logo.png" alt="Logo" class="w-12 h-12 mr-4 no-hover"
                     style="height: 50px; width: auto;" />
-                <h1 class="hidden text-lg font-bold md:flex" translate="no">{{ env('COMPANY_NAME') }}</h1>
+                <h1 class=" text-lg font-bold md:flex" translate="no">{{ env('COMPANY_NAME') }}</h1>
             </div>
 
             <!-- Menu Navigasi Desktop -->
@@ -385,7 +396,7 @@
             <div class="h-auto cursor-pointer md:col-span-1 scale-up grid-item grid-item-1" data-modal="modal-1">
                 <div class="relative w-full h-full overflow-hidden group">
                     <!-- Pastikan gambar menggunakan lebar penuh dari kontainernya -->
-                    <img src="/images/perusahaan.jpg" alt="PT TAKENAKA INDONESIA"
+                    <img src="/images/perusahaan.jpg" alt="pjtki"
                         class="object-cover w-full h-full no-hover">
                     <div
                         class="absolute bottom-0 left-0 w-full p-2 text-sm text-center text-white bg-gray-800 bg-opacity-70">
@@ -442,8 +453,8 @@
     <div class="logos">
         <img src="images/bp2mi.png" alt="BP2MI" class="logo no-hover">
         <img src="images/kemnaker.png" alt="Kemnaker" class="logo no-hover">
-        <img src="images/siapkerja.svg" alt="OSS" class="logo no-hover">
-        <img src="images/karirhub.svg" alt="OSS" class="logo no-hover">
+        <img src="images/siapkerja.svg" alt="Siap Kerja" class="logo no-hover">
+        <img src="images/karirhub.svg" alt="Karir Hub" class="logo no-hover">
         <img src="images/oss.svg" alt="OSS" class="logo no-hover">
     </div>
     <br>
@@ -454,8 +465,8 @@
     <br>
     <div class="imgworkers" style="display: flex; gap: 15px; flex-wrap: wrap;">
         @foreach ($marketing->shuffle()->slice(0, 6) as $item)
-            <img src="{{ Storage::url($item->foto) }}" class="worker-image"
-                style="height: 200px; width: auto; border-radius: 5%; object-fit: cover;" alt="Calon Pekerja">
+        <img src="{{ Storage::url($item->foto) }}" class="worker-image"
+            style="height: 200px; width: auto; border-radius: 5%; object-fit: cover; object-position: center;" alt="Calon Pekerja">
         @endforeach
     </div>
     <br>
@@ -472,6 +483,7 @@
             });
         });
     </script>
+
     <br>
     {{-- <br>
     <div class="title-line">
@@ -495,12 +507,12 @@
     </div>
     <br>
     <div class="logos">
-        <img src="images/agency/1.png"class="logo no-hover" style="height: 30px; width: auto;">
-        <img src="images/agency/2.png"class="logo no-hover" style="height: 30px; width: auto;">
-        <img src="images/agency/3.png"class="logo no-hover" style="height: 30px; width: auto;">
+        <img src="images/agency/1.png" class="logo no-hover" style="height: 30px; width: auto;">
+        <img src="images/agency/2.png" class="logo no-hover" style="height: 30px; width: auto;">
+        <img src="images/agency/3.png" class="logo no-hover" style="height: 30px; width: auto;">
         <img src="images/ujk/1.png" alt="UJK" class="logo no-hover" style="height: 50px; width: auto;">
         <img src="images/ujk/2.png" alt="UJK" class="logo no-hover" style="height: 50px; width: auto;">
-        <img src="images/plus.svg"class="logo no-hover" style="height: 20px; width: auto;">
+        <img src="images/plus.svg" class="logo no-hover" style="height: 20px; width: auto;">
     </div>
     <br>
     <ul class="flex justify-center space-x-6 font-semibold text-sm text-[#09b8a7]">
@@ -514,53 +526,55 @@
         <div class="modal-content">
             <button class="close-modal">X</button>
             <div class="flex justify-center mt-4 logos">
-                <img src="images/logo.png"class="mx-2 logo no-hover" style="height: 150px; width: auto;">
+                <img src="images/logo.png" class="mx-2 logo no-hover" style="height: 150px; width: auto;">
             </div>
-            <h1 class="text-lg font-bold" translate="no">{{ env('COMPANY_NAME') }}</h1>
-            <p class="mt-4 text-justify capitalize">
-                <strong>Adalah</strong> Perusahaan yang berfokus pada penyediaan tenaga kerja berkualitas untuk bekerja
-                di luar negeri. Kami memiliki komitmen yang kuat untuk memberikan layanan perekrutan yang profesional,
-                menjunjung tinggi kepatuhan terhadap regulasi ketenagakerjaan, dan menjamin perlindungan hak-hak pekerja
-                migran.
-            </p>
-            <p class="mt-4 text-justify capitalize">
-                Visi kami adalah menciptakan dunia kerja yang lebih baik bagi tenaga kerja Indonesia, di mana setiap
-                pekerja memiliki akses ke peluang yang aman dan sejahtera. Kami percaya bahwa dengan memfasilitasi
-                penempatan yang tepat, kami dapat berkontribusi pada peningkatan kualitas hidup mereka serta memperkuat
-                perekonomian nasional.
-            </p>
-            <h3 class="mt-4 font-semibold capitalize">Visi</h3>
-            <p class="mt-2 text-justify capitalize">
-                Menjadi perusahaan penempatan pekerja migran terkemuka yang mendukung kesejahteraan tenaga kerja
-                Indonesia di panggung global, serta berkontribusi pada peningkatan perekonomian nasional melalui
-                penempatan tenaga kerja berkualitas.
-            </p>
+            <article>
+                <h1 class="text-lg font-bold" translate="no">{{ env('COMPANY_NAME') }}</h1>
+                <p class="mt-4 text-justify capitalize">
+                    <strong>Adalah</strong> Perusahaan yang berfokus pada penyediaan tenaga kerja berkualitas untuk bekerja
+                    di luar negeri. Kami memiliki komitmen yang kuat untuk memberikan layanan perekrutan yang profesional,
+                    menjunjung tinggi kepatuhan terhadap regulasi ketenagakerjaan, dan menjamin perlindungan hak-hak pekerja
+                    migran.
+                </p>
+                <p class="mt-4 text-justify capitalize">
+                    Visi kami adalah menciptakan dunia kerja yang lebih baik bagi tenaga kerja Indonesia, di mana setiap
+                    pekerja memiliki akses ke peluang yang aman dan sejahtera. Kami percaya bahwa dengan memfasilitasi
+                    penempatan yang tepat, kami dapat berkontribusi pada peningkatan kualitas hidup mereka serta memperkuat
+                    perekonomian nasional.
+                </p>
+                <h3 class="mt-4 font-semibold capitalize">Visi</h3>
+                <p class="mt-2 text-justify capitalize">
+                    Menjadi perusahaan penempatan pekerja migran terkemuka yang mendukung kesejahteraan tenaga kerja
+                    Indonesia di panggung global, serta berkontribusi pada peningkatan perekonomian nasional melalui
+                    penempatan tenaga kerja berkualitas.
+                </p>
 
-            <h3 class="mt-4 font-semibold capitalize">Misi</h3>
-            <ul class="mt-4 capitalize list-disc list-inside">
-                <li>Menyediakan tenaga kerja Indonesia yang terlatih dan kompeten sesuai dengan kebutuhan pasar
-                    internasional.</li>
-                <li>Menjamin proses perekrutan yang transparan, adil, dan sesuai dengan peraturan pemerintah serta
-                    standar internasional.</li>
-                <li>Memberikan perlindungan maksimal bagi pekerja migran melalui dukungan sebelum, selama, dan setelah
-                    masa penempatan kerja.</li>
-                <li>Membangun kemitraan strategis dengan perusahaan internasional yang tepercaya untuk menciptakan
-                    peluang kerja yang aman dan menguntungkan.</li>
-                <li>Meningkatkan kesejahteraan pekerja dan keluarganya melalui upaya pendidikan, pelatihan, dan advokasi
-                    yang berkelanjutan.</li>
-            </ul>
-            <p class="mt-4 text-justify capitalize">
-                Kami memahami bahwa setiap pekerja adalah aset berharga. Oleh karena itu, kami berkomitmen untuk
-                mendukung mereka dalam perjalanan karir mereka, mulai dari proses perekrutan hingga penempatan, serta
-                memberikan bimbingan untuk beradaptasi dengan lingkungan kerja baru.
-            </p>
-            <br>
-            <!-- Menambahkan informasi perizinan resmi -->
-            <p class="mt-2 text-sm font-semibold text-green-700 capitalize">
-                Kami telah berizin resmi dari <strong>BP2MI</strong>, <strong>Kementerian Ketenagakerjaan Republik
-                    Indonesia</strong>, dan terdaftar dalam <strong>Online Single Submission (OSS)</strong> untuk
-                operasi perekrutan pekerja migran.
-            </p>
+                <h3 class="mt-4 font-semibold capitalize">Misi</h3>
+                <ul class="mt-4 capitalize list-disc list-inside">
+                    <li>Menyediakan tenaga kerja Indonesia yang terlatih dan kompeten sesuai dengan kebutuhan pasar
+                        internasional.</li>
+                    <li>Menjamin proses perekrutan yang transparan, adil, dan sesuai dengan peraturan pemerintah serta
+                        standar internasional.</li>
+                    <li>Memberikan perlindungan maksimal bagi pekerja migran melalui dukungan sebelum, selama, dan setelah
+                        masa penempatan kerja.</li>
+                    <li>Membangun kemitraan strategis dengan perusahaan internasional yang tepercaya untuk menciptakan
+                        peluang kerja yang aman dan menguntungkan.</li>
+                    <li>Meningkatkan kesejahteraan pekerja dan keluarganya melalui upaya pendidikan, pelatihan, dan advokasi
+                        yang berkelanjutan.</li>
+                </ul>
+                <p class="mt-4 text-justify capitalize">
+                    Kami memahami bahwa setiap pekerja adalah aset berharga. Oleh karena itu, kami berkomitmen untuk
+                    mendukung mereka dalam perjalanan karir mereka, mulai dari proses perekrutan hingga penempatan, serta
+                    memberikan bimbingan untuk beradaptasi dengan lingkungan kerja baru.
+                </p>
+                <br>
+                <!-- Menambahkan informasi perizinan resmi -->
+                <p class="mt-2 text-sm font-semibold text-green-700 capitalize">
+                    Kami telah berizin resmi dari <strong>BP2MI</strong>, <strong>Kementerian Ketenagakerjaan Republik
+                        Indonesia</strong>, dan terdaftar dalam <strong>Online Single Submission (OSS)</strong> untuk
+                    operasi perekrutan pekerja migran.
+                </p>
+            </article>
 
             <br>
             <br>
@@ -587,14 +601,14 @@
                         </thead>
                         <tbody>
                             @foreach ($pelatihan as $item)
-                                <tr>
-                                    <td class="p-2 text-xs text-left border border-gray-400">
-                                        {{ $item->nama }}
-                                        <br>
-                                        <span class="text-gray-500 text-[10px]">{{ $item->alamat }}</span>
-                                        <!-- Alamat dengan ukuran lebih kecil -->
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="p-2 text-xs text-left border border-gray-400">
+                                    {{ $item->nama }}
+                                    <br>
+                                    <span class="text-gray-500 text-[10px]">{{ $item->alamat }}</span>
+                                    <!-- Alamat dengan ukuran lebih kecil -->
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -610,14 +624,14 @@
                         </thead>
                         <tbody>
                             @foreach ($agency as $item)
-                                <tr>
-                                    <td class="p-2 text-xs text-left border border-gray-400">
-                                        {{ $item->nama }}
-                                        <br>
-                                        <span class="text-gray-500 text-[10px]">{{ $item->alamat }}</span>
-                                        <!-- Alamat dengan ukuran lebih kecil -->
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="p-2 text-xs text-left border border-gray-400">
+                                    {{ $item->nama }}
+                                    <br>
+                                    <span class="text-gray-500 text-[10px]">{{ $item->alamat }}</span>
+                                    <!-- Alamat dengan ukuran lebih kecil -->
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -634,68 +648,70 @@
             <div class="flex justify-center mt-4 logos">
                 <br>
                 <div class="flex justify-center mt-4 logos">
-                    <img src="images/logo.png"class="mx-2 logo no-hover" style="height: 150px; width: auto;">
+                    <img src="images/logo.png" class="mx-2 logo no-hover" style="height: 150px; width: auto;">
                 </div>
                 <br>
                 <br>
                 <br>
             </div>
-            <h1 class="text-lg font-bold" translate="no">{{ env('COMPANY_NAME') }}</h1>
-            <p class="mt-4 text-justify capitalize">
-                adalah Perusahaan yang memiliki lebih dari 10 tahun pengalaman dalam menyediakan layanan penempatan
-                tenaga
-                kerja profesional ke berbagai negara di seluruh dunia. Dengan rekam jejak yang solid, kami fokus pada
-                penyediaan tenaga kerja terlatih dan berkualitas tinggi, telah membantu ribuan pekerja Indonesia
-                mendapatkan
-                pekerjaan yang layak dan aman di luar negeri. Kami bangga menjadi mitra terpercaya di industri ini,
-                dikenal
-                atas komitmen kami untuk meningkatkan kesejahteraan tenaga kerja migran.
-            </p>
+            <article>
+                <h1 class="text-lg font-bold" translate="no">{{ env('COMPANY_NAME') }}</h1>
+                <p class="mt-4 text-justify capitalize">
+                    adalah Perusahaan yang memiliki lebih dari 10 tahun pengalaman dalam menyediakan layanan penempatan
+                    tenaga
+                    kerja profesional ke berbagai negara di seluruh dunia. Dengan rekam jejak yang solid, kami fokus pada
+                    penyediaan tenaga kerja terlatih dan berkualitas tinggi, telah membantu ribuan pekerja Indonesia
+                    mendapatkan
+                    pekerjaan yang layak dan aman di luar negeri. Kami bangga menjadi mitra terpercaya di industri ini,
+                    dikenal
+                    atas komitmen kami untuk meningkatkan kesejahteraan tenaga kerja migran.
+                </p>
 
-            <p class="mt-4 text-justify capitalize">
-                Kami menjalin kerjasama dengan mitra internasional yang tepercaya untuk memastikan bahwa proses
-                perekrutan kami adil, transparan, dan sesuai dengan regulasi yang berlaku. Setiap langkah dalam proses
-                ini didasarkan pada etika kerja yang tinggi dan perlindungan hak-hak pekerja migran.
-            </p>
+                <p class="mt-4 text-justify capitalize">
+                    Kami menjalin kerjasama dengan mitra internasional yang tepercaya untuk memastikan bahwa proses
+                    perekrutan kami adil, transparan, dan sesuai dengan regulasi yang berlaku. Setiap langkah dalam proses
+                    ini didasarkan pada etika kerja yang tinggi dan perlindungan hak-hak pekerja migran.
+                </p>
 
-            <h3 class="mt-4 font-semibold capitalize">Latar Belakang Perusahaan</h3>
-            <p class="mt-2 text-justify capitalize">
-                Didirikan dengan visi untuk memberikan solusi tenaga kerja yang efisien, kami telah menjadi pemimpin
-                dalam industri penempatan pekerja migran. Dengan pengalaman lebih dari satu dekade, kami memahami
-                tantangan yang dihadapi oleh para pekerja dalam mendapatkan pekerjaan di luar negeri. Kami berkomitmen
-                untuk memberikan dukungan penuh sepanjang proses penempatan, membantu pekerja mencapai tujuan karir
-                mereka dengan tim profesional yang berpengalaman dan terlatih.
-            </p>
+                <h3 class="mt-4 font-semibold capitalize">Latar Belakang Perusahaan</h3>
+                <p class="mt-2 text-justify capitalize">
+                    Didirikan dengan visi untuk memberikan solusi tenaga kerja yang efisien, kami telah menjadi pemimpin
+                    dalam industri penempatan pekerja migran. Dengan pengalaman lebih dari satu dekade, kami memahami
+                    tantangan yang dihadapi oleh para pekerja dalam mendapatkan pekerjaan di luar negeri. Kami berkomitmen
+                    untuk memberikan dukungan penuh sepanjang proses penempatan, membantu pekerja mencapai tujuan karir
+                    mereka dengan tim profesional yang berpengalaman dan terlatih.
+                </p>
 
-            <h3 class="mt-4 font-semibold capitalize">Visi</h3>
-            <p class="mt-2 text-justify capitalize">
-                Menjadi perusahaan penempatan pekerja migran terkemuka yang mendukung kesejahteraan tenaga kerja
-                Indonesia di panggung global, serta berkontribusi pada peningkatan perekonomian nasional melalui
-                penempatan tenaga kerja berkualitas.
-            </p>
+                <h3 class="mt-4 font-semibold capitalize">Visi</h3>
+                <p class="mt-2 text-justify capitalize">
+                    Menjadi perusahaan penempatan pekerja migran terkemuka yang mendukung kesejahteraan tenaga kerja
+                    Indonesia di panggung global, serta berkontribusi pada peningkatan perekonomian nasional melalui
+                    penempatan tenaga kerja berkualitas.
+                </p>
 
-            <h3 class="mt-4 font-semibold capitalize">Misi</h3>
-            <ul class="mt-4 capitalize list-disc list-inside">
-                <li>Menyediakan tenaga kerja Indonesia yang terlatih dan kompeten sesuai dengan kebutuhan pasar
-                    internasional.</li>
-                <li>Menjamin proses perekrutan yang transparan, adil, dan sesuai dengan peraturan pemerintah serta
-                    standar internasional.</li>
-                <li>Memberikan perlindungan maksimal bagi pekerja migran melalui dukungan sebelum, selama, dan setelah
-                    masa penempatan kerja.</li>
-                <li>Membangun kemitraan strategis dengan perusahaan internasional yang tepercaya untuk menciptakan
-                    peluang kerja yang aman dan menguntungkan.</li>
-                <li>Meningkatkan kesejahteraan pekerja dan keluarganya melalui upaya pendidikan, pelatihan, dan advokasi
-                    yang berkelanjutan.</li>
-            </ul>
-            <br>
-            <p class="mt-4 text-justify">
-                <strong>Regards</strong>
-                <br><br><br>
-                <strong>David Beckam</strong>
+                <h3 class="mt-4 font-semibold capitalize">Misi</h3>
+                <ul class="mt-4 capitalize list-disc list-inside">
+                    <li>Menyediakan tenaga kerja Indonesia yang terlatih dan kompeten sesuai dengan kebutuhan pasar
+                        internasional.</li>
+                    <li>Menjamin proses perekrutan yang transparan, adil, dan sesuai dengan peraturan pemerintah serta
+                        standar internasional.</li>
+                    <li>Memberikan perlindungan maksimal bagi pekerja migran melalui dukungan sebelum, selama, dan setelah
+                        masa penempatan kerja.</li>
+                    <li>Membangun kemitraan strategis dengan perusahaan internasional yang tepercaya untuk menciptakan
+                        peluang kerja yang aman dan menguntungkan.</li>
+                    <li>Meningkatkan kesejahteraan pekerja dan keluarganya melalui upaya pendidikan, pelatihan, dan advokasi
+                        yang berkelanjutan.</li>
+                </ul>
                 <br>
-                Directur
-            <h1 class="text-lg font-bold" translate="no">{{ env('COMPANY_NAME') }}</h1>
-            </p>
+                <p class="mt-4 text-justify">
+                    <strong>Regards</strong>
+                    <br><br><br>
+                    <strong>David Beckam</strong>
+                    <br>
+                    Directur
+                <h1 class="text-lg font-bold" translate="no">{{ env('COMPANY_NAME') }}</h1>
+                </p>
+            </article>
         </div>
     </div>
 
@@ -704,32 +720,34 @@
     <div id="modal-3" class="modal">
         <div class="modal-content">
             <button class="close-modal">X</button>
-            <h2 class="text-2xl font-bold">SEKTOR FORMAL</h2>
-            <br>
-            <h2 class="text-2xl font-bold">Negara Tujuan</h2>
-            <strong>Asia - Afrika (Hong Kong, Singapura, Taiwan, Malaysia, Korea, Jepang. dll).</strong>
-            <br>
-            <p class="mt-4 capitalize ">
-                Pekerja migran Indonesia di sektor formal sering kali terlibat dalam pekerjaan yang lebih terstruktur
-                dan memiliki perlindungan hukum yang lebih baik. Berikut adalah beberapa sektor pekerjaan yang umum bagi
-                pekerja migran di sektor formal:
-            </p>
-            <br>
-            <h2 class="text-2xl font-bold">Sektor Pekerjaan</h2>
-            <ul class="ml-6 capitalize list-disc">
-                <li><strong>Pekerjaan Profesional:</strong> Dokter, perawat, insinyur, dan tenaga pendidik yang memiliki
-                    kualifikasi tinggi dan izin kerja yang sesuai.</li>
-                <li><strong>Teknologi Informasi:</strong> Pekerja di bidang IT seperti pengembang perangkat lunak,
-                    analis sistem, dan teknisi jaringan.</li>
-                <li><strong>Perbankan dan Keuangan:</strong> Pekerja di sektor perbankan, akuntansi, dan keuangan yang
-                    terlibat dalam analisis keuangan dan manajemen investasi.</li>
-                <li><strong>Industri Manufaktur:</strong> Pekerja yang terlibat dalam proses produksi barang dengan
-                    pengawasan ketat dan standar keselamatan kerja.</li>
-                <li><strong>Pekerjaan di Layanan Publik:</strong> Tenaga kerja yang bekerja di lembaga pemerintah dan
-                    organisasi internasional.</li>
-                <li><strong>Perhotelan dan Pariwisata:</strong> Pekerja di sektor perhotelan sebagai manajer hotel,
-                    resepsionis, dan staf layanan lainnya.</li>
-            </ul>
+            <article>
+                <h2 class="text-2xl font-bold">SEKTOR FORMAL</h2>
+                <br>
+                <h2 class="text-2xl font-bold">Negara Tujuan</h2>
+                <strong>Asia - Afrika (Hong Kong, Singapura, Taiwan, Malaysia, Korea, Jepang. dll).</strong>
+                <br>
+                <p class="mt-4 capitalize ">
+                    Pekerja migran Indonesia di sektor formal sering kali terlibat dalam pekerjaan yang lebih terstruktur
+                    dan memiliki perlindungan hukum yang lebih baik. Berikut adalah beberapa sektor pekerjaan yang umum bagi
+                    pekerja migran di sektor formal:
+                </p>
+                <br>
+                <h2 class="text-2xl font-bold">Sektor Pekerjaan</h2>
+                <ul class="ml-6 capitalize list-disc">
+                    <li><strong>Pekerjaan Profesional:</strong> Dokter, perawat, insinyur, dan tenaga pendidik yang memiliki
+                        kualifikasi tinggi dan izin kerja yang sesuai.</li>
+                    <li><strong>Teknologi Informasi:</strong> Pekerja di bidang IT seperti pengembang perangkat lunak,
+                        analis sistem, dan teknisi jaringan.</li>
+                    <li><strong>Perbankan dan Keuangan:</strong> Pekerja di sektor perbankan, akuntansi, dan keuangan yang
+                        terlibat dalam analisis keuangan dan manajemen investasi.</li>
+                    <li><strong>Industri Manufaktur:</strong> Pekerja yang terlibat dalam proses produksi barang dengan
+                        pengawasan ketat dan standar keselamatan kerja.</li>
+                    <li><strong>Pekerjaan di Layanan Publik:</strong> Tenaga kerja yang bekerja di lembaga pemerintah dan
+                        organisasi internasional.</li>
+                    <li><strong>Perhotelan dan Pariwisata:</strong> Pekerja di sektor perhotelan sebagai manajer hotel,
+                        resepsionis, dan staf layanan lainnya.</li>
+                </ul>
+            </article>
             <br>
             <br>
         </div>
@@ -738,31 +756,34 @@
     <div id="modal-4" class="modal">
         <div class="modal-content">
             <button class="close-modal">X</button>
-            <h2 class="text-2xl font-bold">SEKTOR INFORMAL</h2>
-            <br>
-            <h2 class="text-2xl font-bold">Negara Tujuan</h2>
-            <strong>Asia - Afrika (Hong Kong, Singapura, Taiwan, Malaysia, Korea, Jepang. dll).</strong>
-            <br>
-            <p class="mt-4 capitalize">
-                Pekerja migran Indonesia di sektor informal terlibat dalam beragam pekerjaan yang sering kali berkaitan
-                dengan layanan perawatan, pekerjaan rumah tangga, dan sektor industri. Berikut adalah sektor-sektor
-                pekerjaan yang umum:
-            </p>
-            <br>
-            <h2 class="text-2xl font-bold">Sektor Pekerjaan</h2>
-            <ul class="ml-6 capitalize list-disc">
-                <li><strong>Pekerjaan Rumah Tangga:</strong> Pembantu rumah tangga yang mengurus rumah tangga, merawat
-                    anak, dan lansia. Layanan perawatan untuk individu dengan kebutuhan khusus.</li>
-                <li><strong>Konstruksi:</strong> Tenaga kerja di proyek konstruksi dan infrastruktur. Bekerja di
-                    proyek-proyek pembangunan.</li>
-                <li><strong>Layanan Makanan:</strong> Bekerja di restoran dan kafe sebagai pelayan atau koki.</li>
-                <li><strong>Pekerja Perawatan:</strong> Merawat orang tua atau individu yang membutuhkan bantuan.</li>
-                <li><strong>Pekerja Pabrik:</strong> Terlibat dalam industri manufaktur, terutama di pabrik elektronik
-                    dan tekstil.</li>
-                <li><strong>Pertanian:</strong> Bekerja di sektor pertanian, termasuk pertanian sayuran, buah, dan
-                    kelapa sawit.</li>
-                <li><strong>Industri Perikanan:</strong> Terlibat dalam industri perikanan.</li>
-            </ul>
+            <article>
+
+                <h2 class="text-2xl font-bold">SEKTOR INFORMAL</h2>
+                <br>
+                <h2 class="text-2xl font-bold">Negara Tujuan</h2>
+                <strong>Asia - Afrika (Hong Kong, Singapura, Taiwan, Malaysia, Korea, Jepang. dll).</strong>
+                <br>
+                <p class="mt-4 capitalize">
+                    Pekerja migran Indonesia di sektor informal terlibat dalam beragam pekerjaan yang sering kali berkaitan
+                    dengan layanan perawatan, pekerjaan rumah tangga, dan sektor industri. Berikut adalah sektor-sektor
+                    pekerjaan yang umum:
+                </p>
+                <br>
+                <h2 class="text-2xl font-bold">Sektor Pekerjaan</h2>
+                <ul class="ml-6 capitalize list-disc">
+                    <li><strong>Pekerjaan Rumah Tangga:</strong> Pembantu rumah tangga yang mengurus rumah tangga, merawat
+                        anak, dan lansia. Layanan perawatan untuk individu dengan kebutuhan khusus.</li>
+                    <li><strong>Konstruksi:</strong> Tenaga kerja di proyek konstruksi dan infrastruktur. Bekerja di
+                        proyek-proyek pembangunan.</li>
+                    <li><strong>Layanan Makanan:</strong> Bekerja di restoran dan kafe sebagai pelayan atau koki.</li>
+                    <li><strong>Pekerja Perawatan:</strong> Merawat orang tua atau individu yang membutuhkan bantuan.</li>
+                    <li><strong>Pekerja Pabrik:</strong> Terlibat dalam industri manufaktur, terutama di pabrik elektronik
+                        dan tekstil.</li>
+                    <li><strong>Pertanian:</strong> Bekerja di sektor pertanian, termasuk pertanian sayuran, buah, dan
+                        kelapa sawit.</li>
+                    <li><strong>Industri Perikanan:</strong> Terlibat dalam industri perikanan.</li>
+                </ul>
+            </article>
             <br>
             <br>
         </div>
@@ -773,46 +794,48 @@
     <div id="modal-5" class="modal">
         <div class="modal-content">
             <button class="close-modal">X</button>
-            <h2 class="text-2xl font-bold">Hubungi Kami</h2>
-            <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
-                <!-- Kolom 1 -->
-                <div>
-                    <p>
-                        <strong>Alamat Kantor:</strong><br>
-                    <p class="text-sm" translate="no">{{ env('COMPANY_NAME') }}</p>
-                    <p class="text-sm" translate="no">{{ env('COMPANY_ADD') }}</p>
-                    </p>
-                    <p class="mt-4">
-                        <strong>Nomor Telepon:</strong><br>
-                        +62 21 1234 5678 <br>
-                        +62 21 1234 5678 <a href="https://wa.me/62112345678" target="_blank"
-                            class="text-blue-500">WhatsApp Available</a><br>
-                    </p>
-                    <p class="mt-4">
-                        <strong>Email:</strong><br>
-                        info@pekerjamigran.co.id
-                    </p>
-                </div>
+            <article>
+                <h2 class="text-2xl font-bold">Hubungi Kami</h2>
+                <div class="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
+                    <!-- Kolom 1 -->
+                    <div>
+                        <p>
+                            <strong>Alamat Kantor:</strong><br>
+                        <p class="text-sm" translate="no">{{ env('COMPANY_NAME') }}</p>
+                        <p class="text-sm" translate="no">{{ env('COMPANY_ADD') }}</p>
+                        </p>
+                        <p class="mt-4">
+                            <strong>Nomor Telepon:</strong><br>
+                            +62 21 1234 5678 <br>
+                            +62 21 1234 5678 <a href="https://wa.me/62112345678" target="_blank"
+                                class="text-blue-500">WhatsApp Available</a><br>
+                        </p>
+                        <p class="mt-4">
+                            <strong>Email:</strong><br>
+                            info@pekerjamigran.co.id
+                        </p>
+                    </div>
 
-                <!-- Kolom 2 -->
-                <div>
-                    <p>
-                        <strong>Jam Operasional:</strong><br>
-                        Senin - Jumat: 09:00 - 17:00 WIB<br>
-                        Sabtu: 09:00 - 13:00 WIB
-                    </p>
-                    <p class="mt-4">
-                        <strong>Media Sosial:</strong><br>
-                        Instagram: <a href="https://instagram.com/#" target="_blank"
-                            class="text-blue-500">instagram.com/#</a><br>
-                        Facebook: <a href="https://facebook.com/#" target="_blank"
-                            class="text-blue-500">facebook.com/#</a><br>
-                        Twitter: <a href="https://twitter.com/#" target="_blank"
-                            class="text-blue-500">twitter.com/#</a>
-                    </p>
-                </div>
-            </div>
+                    <!-- Kolom 2 -->
+                    <div>
+                        <p>
+                            <strong>Jam Operasional:</strong><br>
+                            Senin - Jumat: 09:00 - 17:00 WIB<br>
+                            Sabtu: 09:00 - 13:00 WIB
+                        </p>
+                        <p class="mt-4">
+                            <strong>Media Sosial:</strong><br>
+                            Instagram: <a href="https://instagram.com/#" target="_blank"
+                                class="text-blue-500">instagram.com/#</a><br>
+                            Facebook: <a href="https://facebook.com/#" target="_blank"
+                                class="text-blue-500">facebook.com/#</a><br>
+                            Twitter: <a href="https://twitter.com/#" target="_blank"
+                                class="text-blue-500">twitter.com/#</a>
+                        </p>
+                    </div>
+            </article>
         </div>
+    </div>
     </div>
 
 
@@ -825,9 +848,9 @@
                     <div class="flex items-center">
                         <img src="/images/logo-darkmode.png" alt="Logo" class="w-12 h-12 mr-4 no-hover"
                             style="height: 50px; width: auto;" />
-                        {{-- <h1 class="hidden text-lg font-bold md:flex" translate="no">{{ env('COMPANY_NAME') }}</h1> --}}
+                        <h1 class=" text-lg font-bold md:flex center" translate="no">{{ env('COMPANY_NAME') }}</h1>
                     </div>
-                    <p class="hidden mt-2 text-sm transition duration-300 ease-in-out md:flex hover:text-gray-300">
+                    <p class=" mt-2 text-sm transition duration-300 ease-in-out md:flex hover:text-gray-300">
                         Perusahaan Penempatan Pekerja Migran Indonesia <br>
                     <p class="text-sm" translate="no">{{ env('COMPANY_ADD') }}</p>
                     </p>

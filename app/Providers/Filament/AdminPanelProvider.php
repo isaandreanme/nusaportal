@@ -51,7 +51,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->profile(EditProfile::class)
-            ->font('Poppins')
+            ->font('Montserrat')
             ->registration()
             ->passwordReset()
             ->emailVerification()
