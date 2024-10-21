@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
         //--------------------------------
 
         $this->call(PendaftaranSeeder::class);
-        $this->call(ProsesCpmiSeeder::class);
-        $this->call(MarketingSeeder::class);
+        // $this->call(ProsesCpmiSeeder::class);
+        // $this->call(MarketingSeeder::class);
 
 
 

@@ -28,8 +28,8 @@ class UserSeeder extends Seeder
 
             ],
             [
-                'name' => 'Pegawai',
-                'email' => 'pegawai@gmail.com',
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('password'),
                 'created_at' => now(),
                 'email_verified_at' => now(),
@@ -94,7 +94,7 @@ class UserSeeder extends Seeder
 
             ],
         ]);
-        User::factory()->count(499)->create(); // Men-generate 50 user secara otomatis
+        User::factory()->count(99)->create(); // Men-generate 50 user secara otomatis
 
     }
 }

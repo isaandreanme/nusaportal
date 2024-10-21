@@ -18,6 +18,8 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\ToggleColumn;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
@@ -58,6 +60,9 @@ class UserResource extends Resource
     public static function form(Form $form): Form
     {
         $rows = [
+            
+            Fieldset::make('')
+            ->schema([
             TextInput::make('name')
                 ->required()
                 ->label(trans('filament-users::user.resource.name')),
@@ -74,8 +79,11 @@ class UserResource extends Resource
                         ? Hash::make($state)
                         : User::find($form->getColumns())?->password;
                 }),
-        ];
+                Toggle::make('is_admin'),
+                Toggle::make('is_agency'),
+                ])->columns(3),
 
+        ];
 
         if (config('filament-users.shield') && class_exists(\BezhanSalleh\FilamentShield\FilamentShield::class)) {
             $rows[] = Forms\Components\Select::make('roles')
