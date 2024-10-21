@@ -876,12 +876,12 @@
                 </ul>
 
                 <!-- Tautan Internasional -->
-                <ul class="flex space-x-6 text-sm sm:justify-center md:justify-start">
-                    <li><a href="/admin" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN
-                            STAFF</a></li>
-                    <li><a href="/admin" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN
-                            AGENCY</a></li>
+                <ul class="flex justify-center space-x-6 text-sm md:justify-start">
+                    <li><a href="/admin" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN STAFF</a></li>
+                    <li><a href="/admin/workers" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN AGENCY</a></li>
+                    <li><a href="/admin/proses" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN CPMI</a></li>
                 </ul>
+
 
                 {{-- <div id="google_translate_element" class="translate-button"></div> --}}
             </div>
