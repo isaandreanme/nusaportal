@@ -32,11 +32,17 @@ class Proses extends Page implements HasInfolists
     protected ?string $subheading = 'View Details Akun CPMI';
 
     protected static ?int $navigationSort = 20;
-
     public static function shouldRegisterNavigation(): bool
     {
-        return !Auth::user()->is_agency; // Hide navigation for users with is_agency role
+        // Sembunyikan navigasi untuk is_admin dan is_agency
+        return !Auth::user()->is_admin && !Auth::user()->is_agency;
     }
+
+
+    // public static function shouldRegisterNavigation(): bool
+    // {
+    //     return !Auth::user()->is_agency; // Hide navigation for users with is_agency role
+    // }
 
 
     public function infolist(Infolist $infolist): Infolist

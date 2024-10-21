@@ -143,8 +143,11 @@ class AdminPanelProvider extends PanelProvider
                     ->group('Settings')
                     ->url('/', shouldOpenInNewTab: true)
                     ->sort(30)
-                    ->icon('heroicon-o-viewfinder-circle'),
+                    ->icon('heroicon-o-viewfinder-circle')
+                    ->visible(fn(): bool => auth()->user()->can('super_admin'))
+                //-----------------------------------User Bukan Error------------
             ])
+
             ->navigationGroups([
                 NavigationGroup::make()
                     ->label('PROSES')
