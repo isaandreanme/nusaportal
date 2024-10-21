@@ -39,6 +39,39 @@ class UserSeeder extends Seeder
 
             ],
             [
+                'name' => 'Pendaftaran',
+                'email' => 'pendaftaran@gmail.com',
+                'password' => Hash::make('password'),
+                'created_at' => now(),
+                'email_verified_at' => now(),
+                'is_admin' => 1,
+                'is_agency' => 0,
+
+
+            ],
+            [
+                'name' => 'Proses CPMI',
+                'email' => 'prosescpmi@gmail.com',
+                'password' => Hash::make('password'),
+                'created_at' => now(),
+                'email_verified_at' => now(),
+                'is_admin' => 1,
+                'is_agency' => 0,
+
+
+            ],
+            [
+                'name' => 'Marketing',
+                'email' => 'marketing@gmail.com',
+                'password' => Hash::make('password'),
+                'created_at' => now(),
+                'email_verified_at' => now(),
+                'is_admin' => 1,
+                'is_agency' => 0,
+
+
+            ],
+            [
                 'name' => 'Agency',
                 'email' => 'agency@gmail.com',
                 'password' => Hash::make('password'),

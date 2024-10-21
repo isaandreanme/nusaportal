@@ -93,7 +93,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #ffffff;
+            /* background-color: rgba(0, 0, 0, 0.8); */
             /* Background hitam transparan */
             z-index: 999;
             opacity: 0;
@@ -114,7 +115,7 @@
             /* Tambahkan padding internal pada modal content */
             border-radius: 10px;
             /* Membuat sudut modal lebih melengkung */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
             max-width: 90%;
             max-height: 90%;
             width: 100%;
