@@ -9,7 +9,11 @@
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Perusahaan Penempatan Pekerja Migran Indonesia.">
-    <meta name="keywords" content="pekerja migran, tenaga kerja, penempatan kerja, luar negeri, BP2MI, kemnaker, agency, pjtki,">
+    <meta name="keywords" content="pekerja migran, tenaga kerja, penempatan kerja, luar negeri, BP2MI, kemnaker, agency, pjtki, 
+    migrant worker, workforce, job placement, overseas employment, agency, housekeeper, maid,
+     海外労働者, 労働力, 仕事の配置, 海外雇用,
+      エージェンシー, ハウスキーパー, メイド, 外籍劳工, 劳动力, 工作安置, 海外就业, 中介机构, 管家, 女仆, 海外勞工, 勞動力, 工作安置, 海外就業,
+       中介機構, 管家, 女僕">
     <meta name="author" content="{{ env('COMPANY_NAME') }}">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="{{ env('COMPANY_NAME') }}">
@@ -704,7 +708,7 @@
                 </ul>
                 <br>
                 <p class="mt-4 text-justify">
-                    <strong>Regards</strong>
+                    <strong>Salam Hormat</strong>
                     <br><br><br>
                     <strong>David Beckam</strong>
                     <br>
