@@ -21,6 +21,8 @@ class StatusOverviewWidget extends BaseWidget
         }
         return $data;
     }
+    protected int | string | array $columnSpan = 2;
+
 
     protected function getStats(): array
     {
