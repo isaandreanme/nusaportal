@@ -79,7 +79,7 @@ class SalesPolicy
      */
     public function restore(User $user, Sales $sales): bool
     {
-        return $user->can('restore_sales');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class SalesPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_sales');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class SalesPolicy
      */
     public function replicate(User $user, Sales $sales): bool
     {
-        return $user->can('replicate_sales');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class SalesPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_sales');
+        return $user->can('{{ Reorder }}');
     }
 }

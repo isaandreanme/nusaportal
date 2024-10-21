@@ -79,7 +79,7 @@ class StatusPolicy
      */
     public function restore(User $user, Status $status): bool
     {
-        return $user->can('restore_status');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class StatusPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_status');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class StatusPolicy
      */
     public function replicate(User $user, Status $status): bool
     {
-        return $user->can('replicate_status');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class StatusPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_status');
+        return $user->can('{{ Reorder }}');
     }
 }

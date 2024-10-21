@@ -79,7 +79,7 @@ class PelatihanPolicy
      */
     public function restore(User $user, Pelatihan $pelatihan): bool
     {
-        return $user->can('restore_pelatihan');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class PelatihanPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_pelatihan');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class PelatihanPolicy
      */
     public function replicate(User $user, Pelatihan $pelatihan): bool
     {
-        return $user->can('replicate_pelatihan');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class PelatihanPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_pelatihan');
+        return $user->can('{{ Reorder }}');
     }
 }

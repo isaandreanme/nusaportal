@@ -79,7 +79,7 @@ class KantorPolicy
      */
     public function restore(User $user, Kantor $kantor): bool
     {
-        return $user->can('restore_kantor');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class KantorPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_kantor');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class KantorPolicy
      */
     public function replicate(User $user, Kantor $kantor): bool
     {
-        return $user->can('replicate_kantor');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class KantorPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_kantor');
+        return $user->can('{{ Reorder }}');
     }
 }

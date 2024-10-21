@@ -79,7 +79,7 @@ class ProsesCpmiPolicy
      */
     public function restore(User $user, ProsesCpmi $prosesCpmi): bool
     {
-        return $user->can('restore_proses::cpmi');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class ProsesCpmiPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_proses::cpmi');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class ProsesCpmiPolicy
      */
     public function replicate(User $user, ProsesCpmi $prosesCpmi): bool
     {
-        return $user->can('replicate_proses::cpmi');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class ProsesCpmiPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_proses::cpmi');
+        return $user->can('{{ Reorder }}');
     }
 }

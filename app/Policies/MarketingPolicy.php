@@ -79,7 +79,7 @@ class MarketingPolicy
      */
     public function restore(User $user, Marketing $marketing): bool
     {
-        return $user->can('restore_marketing');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class MarketingPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_marketing');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class MarketingPolicy
      */
     public function replicate(User $user, Marketing $marketing): bool
     {
-        return $user->can('replicate_marketing');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class MarketingPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_marketing');
+        return $user->can('{{ Reorder }}');
     }
 }

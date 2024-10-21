@@ -36,6 +36,7 @@ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Awcodes\LightSwitch\Enums\Alignment;
 use EightyNine\Approvals\ApprovalPlugin;
+use Filament\Enums\ThemeMode;
 use Filament\Navigation\NavigationItem;
 use Filament\Pages\Auth\EditProfile;
 use Hasnayeen\Themes\Http\Middleware\SetTheme;
@@ -52,6 +53,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->profile(EditProfile::class)
             ->font('Montserrat')
+            ->defaultThemeMode(ThemeMode::Light)
             ->registration()
             ->passwordReset()
             ->emailVerification()
@@ -114,7 +116,22 @@ class AdminPanelProvider extends PanelProvider
                             ->directory('images/backgrounds')
                     ),
                 FilamentUsersPlugin::make(),
-                FilamentShieldPlugin::make(),
+                FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 3
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 2,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                    ]),
                 FilamentApexChartsPlugin::make(),
                 FilamentPWAPlugin::make(),
                 FilamentSettingsHubPlugin::make()

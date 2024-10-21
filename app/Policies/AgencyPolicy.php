@@ -79,7 +79,7 @@ class AgencyPolicy
      */
     public function restore(User $user, Agency $agency): bool
     {
-        return $user->can('restore_agency');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class AgencyPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_agency');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class AgencyPolicy
      */
     public function replicate(User $user, Agency $agency): bool
     {
-        return $user->can('replicate_agency');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class AgencyPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_agency');
+        return $user->can('{{ Reorder }}');
     }
 }

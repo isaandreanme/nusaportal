@@ -79,7 +79,7 @@ class TujuanPolicy
      */
     public function restore(User $user, Tujuan $tujuan): bool
     {
-        return $user->can('restore_tujuan');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class TujuanPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_tujuan');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class TujuanPolicy
      */
     public function replicate(User $user, Tujuan $tujuan): bool
     {
-        return $user->can('replicate_tujuan');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class TujuanPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_tujuan');
+        return $user->can('{{ Reorder }}');
     }
 }

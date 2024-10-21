@@ -79,7 +79,7 @@ class PengalamanPolicy
      */
     public function restore(User $user, Pengalaman $pengalaman): bool
     {
-        return $user->can('restore_pengalaman');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class PengalamanPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_pengalaman');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class PengalamanPolicy
      */
     public function replicate(User $user, Pengalaman $pengalaman): bool
     {
-        return $user->can('replicate_pengalaman');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class PengalamanPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_pengalaman');
+        return $user->can('{{ Reorder }}');
     }
 }

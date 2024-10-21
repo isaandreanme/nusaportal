@@ -79,7 +79,7 @@ class SponsorPolicy
      */
     public function restore(User $user, Sponsor $sponsor): bool
     {
-        return $user->can('restore_sponsor');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class SponsorPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_sponsor');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class SponsorPolicy
      */
     public function replicate(User $user, Sponsor $sponsor): bool
     {
-        return $user->can('replicate_sponsor');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class SponsorPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_sponsor');
+        return $user->can('{{ Reorder }}');
     }
 }

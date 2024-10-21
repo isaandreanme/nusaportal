@@ -79,7 +79,7 @@ class PendaftaranPolicy
      */
     public function restore(User $user, Pendaftaran $pendaftaran): bool
     {
-        return $user->can('restore_pendaftaran');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class PendaftaranPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_pendaftaran');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class PendaftaranPolicy
      */
     public function replicate(User $user, Pendaftaran $pendaftaran): bool
     {
-        return $user->can('replicate_pendaftaran');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class PendaftaranPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_pendaftaran');
+        return $user->can('{{ Reorder }}');
     }
 }

@@ -79,7 +79,7 @@ class AnnouncementPolicy
      */
     public function restore(User $user, Announcement $announcement): bool
     {
-        return $user->can('restore_announcement');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class AnnouncementPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_announcement');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class AnnouncementPolicy
      */
     public function replicate(User $user, Announcement $announcement): bool
     {
-        return $user->can('replicate_announcement');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class AnnouncementPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_announcement');
+        return $user->can('{{ Reorder }}');
     }
 }
