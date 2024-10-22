@@ -164,10 +164,25 @@
     <!-- resources/views/kelompokan_berdasarkan_status.blade.php -->
     @foreach($kantors as $kantor)
     <div class="page-break"></div> <!-- Page break per kantor -->
-
+    <table class="header-table" width="100%">
+        <tr>
+            <td width="33%" style="text-align: left;">
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/logo.png'))) }}" alt="Logo" width="40">
+            </td>
+            <td width="33%" style="text-align: right;">
+                <div>
+                    <p><strong>Tanggal Unduh:</strong> {{ date('d-m-Y H:i:s') }}</p>
+                </div>
+            </td>
+        </tr>
+    </table>
     <!-- <h2 align="center">Kelompokan Berdasarkan Status</h2> -->
-    <h2 align="center">{{ $kantor->nama }}</h2> <!-- Nama kantor -->
-    <p style="text-align: right;"><strong>Tanggal Unduh:</strong> {{ date('d-m-Y H:i:s') }}</p>
+    <h2 align="center">KANTOR - {{ $kantor->nama }}</h2> <!-- Nama kantor -->
+    <p align="center"><strong>Periode:</strong>
+        {{ $start ? \Carbon\Carbon::parse($start)->format('d-m-Y') : 'Semua tanggal' }}
+        s/d
+        {{ $end ? \Carbon\Carbon::parse($end)->format('d-m-Y') : 'Sekarang' }}
+    </p>
 
     <!-- Iterasi per status di dalam setiap kantor -->
     @foreach($statuses as $status)
@@ -179,7 +194,6 @@
                 <th>Daftar</th>
                 <th>Nama</th>
                 <th>Tujuan</th>
-                <th>Kantor</th>
                 <th>LPKS/BLK</th>
                 <th>Agency/Job</th>
                 @if($status->id == 3 || strtolower($status->nama) == 'terbang')
@@ -202,8 +216,6 @@
                 <!-- Negara Tujuan -->
                 <td style="text-align: left;">{{ $prosesCpmi->tujuan->nama ?? '-' }}</td>
 
-                <!-- Negara Kantor -->
-                <td style="text-align: left;">{{ $prosesCpmi->pendaftaran->kantor->nama ?? '-' }}</td>
 
                 <!-- Negara Pelatihan -->
                 <td style="text-align: left;">{{ $prosesCpmi->pelatihan->nama ?? '-' }}</td>
