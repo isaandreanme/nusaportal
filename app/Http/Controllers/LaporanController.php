@@ -143,13 +143,6 @@ class LaporanController extends Controller
             $jumlahData[$kantor->nama]['total'] = $totalPerKantor;
             $grandTotal += $totalPerKantor;
         }
-
-        // Data tambahan untuk tabel pengelompokan berdasarkan status_id
-        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
-        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
-        $dataByStatus = [];
-
-        // Definisikan logika query umum untuk rentang tanggal
         // Inisialisasi array kosong untuk menyimpan data berdasarkan status
         $dataByStatus = [];
 
@@ -159,24 +152,22 @@ class LaporanController extends Controller
         })->when($end, function ($query) use ($end) {
             return $query->whereDate('created_at', '<=', $end);
         });
-
-        // Lakukan iterasi pada setiap status untuk mengambil data
+        
         foreach ($statuses as $status) {
-            $dataByStatus[$status->nama] = $baseQuery->clone() // Meng-clone query dasar agar tidak memodifikasi aslinya
-                ->where('status_id', $status->id) // Filter data berdasarkan status_id
+            $dataByStatus[$status->nama] = $baseQuery->clone() 
+                ->where('status_id', $status->id)
                 ->with([
                     'pendaftaran' => function ($query) {
-                        // Ambil field spesifik dari Pendaftaran
-                        $query->select('id', 'nama', 'created_at')
-                            ->with(['marketing.agency' => function ($query) {
-                                // Ambil nama dari relasi Agency melalui Marketing
+                        // Ambil field spesifik dari Pendaftaran termasuk kantor_id
+                        $query->select('id', 'nama', 'created_at', 'kantor_id')
+                            ->with(['kantor', 'marketing.agency' => function ($query) {
                                 $query->select('id', 'nama');
                             }]);
                     },
-                    'tujuan' // Memuat relasi 'tujuan'
+                    'tujuan', // Memuat relasi 'tujuan'
+                    'pelatihan' // Memuat relasi 'pelatihan'
                 ])
-                // Pastikan untuk mengambil field tanggal_penerbangan dari ProsesCpmi
-                ->select('id', 'pendaftaran_id', 'tujuan_id', 'status_id', 'created_at', 'tanggal_penerbangan')
+                ->select('id', 'pendaftaran_id', 'tujuan_id', 'pelatihan_id', 'status_id', 'created_at', 'tanggal_penerbangan') // Hilangkan kantor_id di sini
                 ->get();
         }
 
@@ -319,9 +310,6 @@ class LaporanController extends Controller
             $grandTotal += $totalPerKantor;
         }
 
-        // Data tambahan untuk tabel pengelompokan berdasarkan status_id
-        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
-        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
         // Inisialisasi array kosong untuk menyimpan data berdasarkan status
         $dataByStatus = [];
 
@@ -331,27 +319,24 @@ class LaporanController extends Controller
         })->when($end, function ($query) use ($end) {
             return $query->whereDate('created_at', '<=', $end);
         });
-
-        // Lakukan iterasi pada setiap status untuk mengambil data
+        
         foreach ($statuses as $status) {
-            $dataByStatus[$status->nama] = $baseQuery->clone() // Meng-clone query dasar agar tidak memodifikasi aslinya
-                ->where('status_id', $status->id) // Filter data berdasarkan status_id
+            $dataByStatus[$status->nama] = $baseQuery->clone() 
+                ->where('status_id', $status->id)
                 ->with([
                     'pendaftaran' => function ($query) {
-                        // Ambil field spesifik dari Pendaftaran
-                        $query->select('id', 'nama', 'created_at')
-                            ->with(['marketing.agency' => function ($query) {
-                                // Ambil nama dari relasi Agency melalui Marketing
+                        // Ambil field spesifik dari Pendaftaran termasuk kantor_id
+                        $query->select('id', 'nama', 'created_at', 'kantor_id')
+                            ->with(['kantor', 'marketing.agency' => function ($query) {
                                 $query->select('id', 'nama');
                             }]);
                     },
-                    'tujuan' // Memuat relasi 'tujuan'
+                    'tujuan', // Memuat relasi 'tujuan'
+                    'pelatihan' // Memuat relasi 'pelatihan'
                 ])
-                // Pastikan untuk mengambil field tanggal_penerbangan dari ProsesCpmi
-                ->select('id', 'pendaftaran_id', 'tujuan_id', 'status_id', 'created_at', 'tanggal_penerbangan')
+                ->select('id', 'pendaftaran_id', 'tujuan_id', 'pelatihan_id', 'status_id', 'created_at', 'tanggal_penerbangan') // Hilangkan kantor_id di sini
                 ->get();
         }
-
 
 
 

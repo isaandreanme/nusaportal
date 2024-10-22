@@ -173,6 +173,8 @@
                 <th>Tanggal Daftar</th>
                 <th>Nama</th>
                 <th>Negara Tujuan</th>
+                <th>Kantor</th>
+                <th>LPKS/BLK</th>
                 <th>Agency (Job)</th>
                 @if($status->id == 3 || strtolower($status->nama) == 'terbang')
                 <th>Penerbangan</th>
@@ -193,6 +195,12 @@
 
                 <!-- Negara Tujuan -->
                 <td>{{ $prosesCpmi->tujuan->nama ?? '-' }}</td>
+
+                <!-- Negara Kantor -->
+                <td>{{ $prosesCpmi->pendaftaran->kantor->nama ?? '-' }}</td>
+
+                <!-- Negara Pelatihan -->
+                <td>{{ $prosesCpmi->pelatihan->nama ?? '-' }}</td>
 
                 <!-- Iterasi jika relasi marketing hasMany -->
                 <td>
