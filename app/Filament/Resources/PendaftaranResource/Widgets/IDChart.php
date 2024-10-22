@@ -16,7 +16,6 @@ class IDChart extends ApexChartWidget
 
     protected static ?string $chartId = 'idBp2miChart';
     protected static ?string $heading = 'ID BP2MI';
-    // protected int | string | array $columnSpan = 'full';
 
     /**
      * Mengambil data untuk grafik
@@ -29,48 +28,48 @@ class IDChart extends ApexChartWidget
         $start = $this->filters['startDate'] ?? null;
         $end = $this->filters['endDate'] ?? null;
 
-        // Ambil nama kantor dari model Kantor
-        $kantor1Nama = Kantor::find(1)->nama ?? 'Kantor 1';
-        $kantor2Nama = Kantor::find(2)->nama ?? 'Kantor 2';
-        $kantor3Nama = Kantor::find(3)->nama ?? 'Kantor 3';
-        $kantor4Nama = Kantor::find(4)->nama ?? 'Kantor 4';
+        // Ambil semua kantor yang tersedia di database
+        $kantorData = Kantor::all();
 
-        // Ambil data per bulan untuk tiap kantor
-        $kantor1 = $this->getKantorData(1, $start, $end);
-        $kantor2 = $this->getKantorData(2, $start, $end);
-        $kantor3 = $this->getKantorData(3, $start, $end);
-        $kantor4 = $this->getKantorData(4, $start, $end);
+        // Siapkan series dan warna kantor
+        $series = [];
+        $colors = ['#f59e0b', '#1c64f2', '#10b981', '#ef4444', '#6b7280'];
+
+        foreach ($kantorData as $index => $kantor) {
+            $kantorId = $kantor->id;
+            $kantorNama = $kantor->nama;
+
+            // Ambil data proses untuk kantor tertentu
+            $kantorJobData = $this->getKantorData($kantorId, $start, $end);
+
+            // Jika ada data, tambahkan ke series
+            if ($kantorJobData->isNotEmpty()) {
+                $series[] = [
+                    'name' => $kantorNama,
+                    'data' => $kantorJobData->map(fn(TrendValue $value) => $value->aggregate),
+                    'color' => $colors[$index % count($colors)] // Mengulang warna jika jumlah kantor lebih dari jumlah warna
+                ];
+            }
+        }
 
         // Ambil data total tanpa filter kantor_id
         $total = $this->getTotalData($start, $end);
+
+        // Tambahkan data total ke series
+        if ($total->isNotEmpty()) {
+            $series[] = [
+                'name' => 'TOTAL',
+                'data' => $total->map(fn(TrendValue $value) => $value->aggregate),
+                'color' => '#6b7280', // Warna untuk total
+            ];
+        }
 
         return [
             'chart' => [
                 'type' => 'line', // Jenis grafik garis
                 'height' => 300,
             ],
-            'series' => [
-                [
-                    'name' => $kantor1Nama,
-                    'data' => $kantor1->map(fn(TrendValue $value) => $value->aggregate),
-                ],
-                [
-                    'name' => $kantor2Nama,
-                    'data' => $kantor2->map(fn(TrendValue $value) => $value->aggregate),
-                ],
-                [
-                    'name' => $kantor3Nama,
-                    'data' => $kantor3->map(fn(TrendValue $value) => $value->aggregate),
-                ],
-                [
-                    'name' => $kantor4Nama,
-                    'data' => $kantor4->map(fn(TrendValue $value) => $value->aggregate),
-                ],
-                [
-                    'name' => 'TOTAL',
-                    'data' => $total->map(fn(TrendValue $value) => $value->aggregate),
-                ],
-            ],
+            'series' => $series,
             'xaxis' => [
                 'categories' => $total->map(fn(TrendValue $value) => Carbon::parse($value->date)->translatedFormat('M y')),
                 'labels' => [
@@ -86,28 +85,25 @@ class IDChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#f59e0b', '#1c64f2', '#10b981', '#ef4444', '#6b7280'], // Warna per kantor
             'stroke' => [
                 'curve' => 'smooth', // Garis halus
                 'width' => 2, // Ketebalan garis
             ],
-            // Grid-----------------------------------
             'grid' => [
                 'show' => false,
-                'borderColor' => '#e0e0e0',  // Mengatur warna grid line (lebih terang)
-                'strokeDashArray' => 1,       // Membuat grid line menjadi dashed
+                'borderColor' => '#e0e0e0',
+                'strokeDashArray' => 1,
                 'xaxis' => [
                     'lines' => [
-                        'show' => true,      // Tampilkan grid pada x-axis
+                        'show' => true,
                     ],
                 ],
                 'yaxis' => [
                     'lines' => [
-                        'show' => true,      // Tampilkan grid pada y-axis
+                        'show' => true,
                     ],
                 ],
             ],
-            // Grid-----------------------------------
         ];
     }
 
