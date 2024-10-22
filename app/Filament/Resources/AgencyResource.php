@@ -32,11 +32,12 @@ class AgencyResource extends Resource
                     ->schema([
                         TextInput::make('nama')->required(),
                         TextInput::make('penanggungjawab')
-                            ->label('Penanggung Jawab'),
+                            ->label(__('Penanggung Jawab')),
                         TextInput::make('nomortelp')
-                            ->label('Nomor Telepon'),
+                            ->label(__('Nomor Telepon')),
                         TextInput::make('alamat')
-                            ->label('ALamat'),
+                            ->label(__('ALamat')),
+
                     ])
             ]);
     }
@@ -45,11 +46,12 @@ class AgencyResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->label('ID'),
-                TextColumn::make('nama')->label('NAMA AFENCY'),
-                TextColumn::make('penanggungjawab')->label('PENANGGUNG JAWAB'),
-                TextColumn::make('nomortelp')->label('NOMOR TELEPON'),
-                TextColumn::make('alamat')->label('ALAMAT'), 
+                TextColumn::make('id')->label(__('ID')),
+                TextColumn::make('nama')->label(__('NAMA AGENCY')),
+                TextColumn::make('penanggungjawab')->label(__('PENANGGUNG JAWAB')),
+                TextColumn::make('nomortelp')->label(__('NOMOR TELEPON')),
+                TextColumn::make('alamat')->label(__('ALAMAT')),
+
             ])
             ->filters([
                 //
