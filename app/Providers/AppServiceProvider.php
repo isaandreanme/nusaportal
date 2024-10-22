@@ -9,6 +9,7 @@ use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['id','en',])
+                // ->flags([
+                //     'id' => asset('flags/indonesian.svg'),
+                //     'en' => asset('flags/usa.svg'),
+                // ])
+                ->circular(); // also accepts a closure
+        });
         FilamentUser::registerAction(\Filament\Actions\Action::make('update'));
         FilamentUser::registerCreateAction(\Filament\Actions\Action::make('update'));
         FilamentUser::registerEditAction(\Filament\Actions\Action::make('update'));

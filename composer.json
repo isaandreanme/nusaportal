@@ -10,6 +10,7 @@
         "aymanalhattami/filament-slim-scrollbar": "^2.0",
         "azishapidin/indoregion": "^3.0",
         "barryvdh/laravel-dompdf": "^3.0",
+        "bezhansalleh/filament-language-switch": "^3.1",
         "bezhansalleh/filament-shield": "^3.2",
         "dotswan/filament-laravel-pulse": "^1.1",
         "eightynine/filament-advanced-widgets": "^3.0",

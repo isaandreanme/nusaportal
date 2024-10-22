@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [],
+    content: [
+        './vendor/bezhansalleh/filament-language-switch/resources/views/language-switch.blade.php',
+    ],
     theme: {
         extend: {},
     },
