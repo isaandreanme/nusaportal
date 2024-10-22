@@ -157,39 +157,65 @@
         </tbody>
     </table>
 
-    <!-- Tabel Kelompokan Berdasarkan Status -->
+    <!-- resources/views/kelompokan_berdasarkan_status.blade.php -->
+    <!-- resources/views/kelompokan_berdasarkan_status.blade.php -->
     @foreach($statuses as $status)
     <div class="page-break"></div> <!-- Page break per status -->
+
     <h2 align="center">Kelompokan Berdasarkan Status</h2>
     <h3>{{ $status->nama }}</h3>
-    <table class="left-align">
+
+    <!-- Jika status adalah 'Terbang', tambahkan kolom 'Penerbangan' -->
+    <table>
         <thead>
             <tr>
-                <th>No</th> <!-- Tambahkan nomor -->
+                <th>No</th>
                 <th>Tanggal Daftar</th>
                 <th>Nama</th>
                 <th>Negara Tujuan</th>
-                <th>Job</th>
+                <th>Agency (Job)</th>
+                @if($status->id == 3 || strtolower($status->nama) == 'terbang')
+                <th>Penerbangan</th>
+                @endif
             </tr>
         </thead>
-        <tbody>
-            @php $no = 1; @endphp <!-- Inisialisasi variabel nomor -->
-            @forelse($dataByStatus[$status->nama] as $prosesCpmi)
+        <tbody class="left-align">
+            @php $no = 1; @endphp
+            @forelse($dataByStatus[$status->nama]->sortBy(fn($item) => $item->pendaftaran->created_at ?? now()) as $prosesCpmi)
             <tr>
-                <td>{{ $no++ }}</td> <!-- Nomor urut -->
-                <td>{{ \Carbon\Carbon::parse($prosesCpmi->pendaftaran->created_at)->format('d-m-Y') ?? '-' }}</td>
+                <td>{{ $no++ }}</td>
+
+                <!-- Format Tanggal Pendaftaran -->
+                <td>{{ isset($prosesCpmi->pendaftaran->created_at) ? \Carbon\Carbon::parse($prosesCpmi->pendaftaran->created_at)->format('d-m-Y') : '-' }}</td>
+
+                <!-- Nama Pendaftar -->
                 <td>{{ $prosesCpmi->pendaftaran->nama ?? '-' }}</td>
+
+                <!-- Negara Tujuan -->
                 <td>{{ $prosesCpmi->tujuan->nama ?? '-' }}</td>
-                <td>{{ $prosesCpmi->marketing->agency->nama ?? '-' }}</td>
+
+                <!-- Iterasi jika relasi marketing hasMany -->
+                <td>
+                    @foreach($prosesCpmi->pendaftaran->marketing as $marketing)
+                    {{ $marketing->agency->nama ?? '-' }} <br>
+                    @endforeach
+                </td>
+
+                <!-- Tampilkan kolom Penerbangan hanya jika status 'Terbang' -->
+                @if($status->id == 3 || strtolower($status->nama) == 'terbang')
+                <td>{{ isset($prosesCpmi->tanggal_penerbangan) ? \Carbon\Carbon::parse($prosesCpmi->tanggal_penerbangan)->format('d-m-Y') : '-' }}</td>
+                @endif
             </tr>
             @empty
             <tr>
-                <td colspan="5">Tidak ada data</td>
+                <td colspan="{{ $status->id == 3 || strtolower($status->nama) == 'terbang' ? 6 : 5 }}" align="center">Tidak ada data untuk status ini.</td>
             </tr>
             @endforelse
         </tbody>
     </table>
     @endforeach
+
+
 </body>
 
 </html>

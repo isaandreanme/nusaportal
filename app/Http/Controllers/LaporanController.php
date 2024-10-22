@@ -145,26 +145,41 @@ class LaporanController extends Controller
         }
 
         // Data tambahan untuk tabel pengelompokan berdasarkan status_id
+        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
+        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
         $dataByStatus = [];
 
+        // Definisikan logika query umum untuk rentang tanggal
+        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
+        $dataByStatus = [];
+
+        // Definisikan logika query umum untuk rentang tanggal
+        $baseQuery = ProsesCpmi::when($start, function ($query) use ($start) {
+            return $query->whereDate('created_at', '>=', $start);
+        })->when($end, function ($query) use ($end) {
+            return $query->whereDate('created_at', '<=', $end);
+        });
+
+        // Lakukan iterasi pada setiap status untuk mengambil data
         foreach ($statuses as $status) {
-            $dataByStatus[$status->nama] = ProsesCpmi::when($start, function ($query) use ($start) {
-                    return $query->whereDate('created_at', '>=', $start);
-                })
-                ->when($end, function ($query) use ($end) {
-                    return $query->whereDate('created_at', '<=', $end);
-                })
-                ->where('status_id', $status->id)
+            $dataByStatus[$status->nama] = $baseQuery->clone() // Meng-clone query dasar agar tidak memodifikasi aslinya
+                ->where('status_id', $status->id) // Filter data berdasarkan status_id
                 ->with([
                     'pendaftaran' => function ($query) {
-                        // Mengambil nama dan created_at dari kelas Pendaftaran
-                        $query->select('id', 'nama', 'created_at');
+                        // Ambil field spesifik dari Pendaftaran
+                        $query->select('id', 'nama', 'created_at')
+                            ->with(['marketing.agency' => function ($query) {
+                                // Ambil nama dari relasi Agency melalui Marketing
+                                $query->select('id', 'nama');
+                            }]);
                     },
-                    'tujuan', // Mengambil tujuan negara dari ProsesCpmi
-                    'marketing.agency' // Mengambil data Job (agency_id) dari kelas Marketing
+                    'tujuan' // Memuat relasi 'tujuan'
                 ])
+                // Pastikan untuk mengambil field tanggal_penerbangan dari ProsesCpmi
+                ->select('id', 'pendaftaran_id', 'tujuan_id', 'status_id', 'created_at', 'tanggal_penerbangan')
                 ->get();
         }
+
 
         // Kirim data ke view laporan.blade.php
         return view('laporan', compact(
@@ -305,26 +320,41 @@ class LaporanController extends Controller
         }
 
         // Data tambahan untuk tabel pengelompokan berdasarkan status_id
+        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
+        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
+        // Inisialisasi array kosong untuk menyimpan data berdasarkan status
         $dataByStatus = [];
 
+        // Definisikan logika query umum untuk rentang tanggal
+        $baseQuery = ProsesCpmi::when($start, function ($query) use ($start) {
+            return $query->whereDate('created_at', '>=', $start);
+        })->when($end, function ($query) use ($end) {
+            return $query->whereDate('created_at', '<=', $end);
+        });
+
+        // Lakukan iterasi pada setiap status untuk mengambil data
         foreach ($statuses as $status) {
-            $dataByStatus[$status->nama] = ProsesCpmi::when($start, function ($query) use ($start) {
-                    return $query->whereDate('created_at', '>=', $start);
-                })
-                ->when($end, function ($query) use ($end) {
-                    return $query->whereDate('created_at', '<=', $end);
-                })
-                ->where('status_id', $status->id)
+            $dataByStatus[$status->nama] = $baseQuery->clone() // Meng-clone query dasar agar tidak memodifikasi aslinya
+                ->where('status_id', $status->id) // Filter data berdasarkan status_id
                 ->with([
                     'pendaftaran' => function ($query) {
-                        // Mengambil nama dan created_at dari kelas Pendaftaran
-                        $query->select('id', 'nama', 'created_at');
+                        // Ambil field spesifik dari Pendaftaran
+                        $query->select('id', 'nama', 'created_at')
+                            ->with(['marketing.agency' => function ($query) {
+                                // Ambil nama dari relasi Agency melalui Marketing
+                                $query->select('id', 'nama');
+                            }]);
                     },
-                    'tujuan', // Mengambil tujuan negara dari ProsesCpmi
-                    'marketing.agency' // Mengambil data Job (agency_id) dari kelas Marketing
+                    'tujuan' // Memuat relasi 'tujuan'
                 ])
+                // Pastikan untuk mengambil field tanggal_penerbangan dari ProsesCpmi
+                ->select('id', 'pendaftaran_id', 'tujuan_id', 'status_id', 'created_at', 'tanggal_penerbangan')
                 ->get();
         }
+
+
+
+
 
         $pdf = FacadePdf::loadView('laporan', compact(
             'jumlahData',
