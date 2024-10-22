@@ -49,6 +49,20 @@
         img {
             max-width: 100px;
         }
+
+        /* Style untuk page break */
+        .page-break {
+            page-break-before: always;
+        }
+
+        /* Buat kolom NO, TANGGAL DAFTAR, NAMA, NEGARA TUJUAN, JOB rata kiri */
+        .left-align td:nth-child(1),
+        .left-align td:nth-child(2),
+        .left-align td:nth-child(3),
+        .left-align td:nth-child(4),
+        .left-align td:nth-child(5) {
+            text-align: left;
+        }
     </style>
 </head>
 
@@ -125,11 +139,11 @@
             @foreach($kantors as $kantor)
             <tr>
                 <td>{{ $kantor->nama }}</td>
-                <td>{{ $jumlahPraMedical[$kantor->nama] ?? 0 }}</td> <!-- Pra Medical dari array -->
-                <td>{{ $jumlahSiapKerja[$kantor->nama] ?? 0 }}</td> <!-- Siap Kerja dari array -->
-                <td>{{ $jumlahBp2mi[$kantor->nama] ?? 0 }}</td> <!-- ID BP2MI dari array -->
-                <td>{{ $jumlahDapatJob[$kantor->nama] ?? 0 }}</td> <!-- Dapat Job dari array -->
-                <td>{{ $jumlahPenerbangan[$kantor->nama] ?? 0 }}</td> <!-- Penerbangan dari array -->
+                <td>{{ $jumlahPraMedical[$kantor->nama] ?? 0 }}</td>
+                <td>{{ $jumlahSiapKerja[$kantor->nama] ?? 0 }}</td>
+                <td>{{ $jumlahBp2mi[$kantor->nama] ?? 0 }}</td>
+                <td>{{ $jumlahDapatJob[$kantor->nama] ?? 0 }}</td>
+                <td>{{ $jumlahPenerbangan[$kantor->nama] ?? 0 }}</td>
             </tr>
             @endforeach
             <tr>
@@ -142,6 +156,40 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- Tabel Kelompokan Berdasarkan Status -->
+    @foreach($statuses as $status)
+    <div class="page-break"></div> <!-- Page break per status -->
+    <h2 align="center">Kelompokan Berdasarkan Status</h2>
+    <h3>{{ $status->nama }}</h3>
+    <table class="left-align">
+        <thead>
+            <tr>
+                <th>No</th> <!-- Tambahkan nomor -->
+                <th>Tanggal Daftar</th>
+                <th>Nama</th>
+                <th>Negara Tujuan</th>
+                <th>Job</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php $no = 1; @endphp <!-- Inisialisasi variabel nomor -->
+            @forelse($dataByStatus[$status->nama] as $prosesCpmi)
+            <tr>
+                <td>{{ $no++ }}</td> <!-- Nomor urut -->
+                <td>{{ \Carbon\Carbon::parse($prosesCpmi->pendaftaran->created_at)->format('d-m-Y') ?? '-' }}</td>
+                <td>{{ $prosesCpmi->pendaftaran->nama ?? '-' }}</td>
+                <td>{{ $prosesCpmi->tujuan->nama ?? '-' }}</td>
+                <td>{{ $prosesCpmi->marketing->agency->nama ?? '-' }}</td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="5">Tidak ada data</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+    @endforeach
 </body>
 
 </html>

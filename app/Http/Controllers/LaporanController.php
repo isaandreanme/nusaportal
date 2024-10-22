@@ -61,7 +61,7 @@ class LaporanController extends Controller
                 $totalPerStatus[$status->id] += $count;
             }
 
-            // Hitung Pra Medical hanya jika status_id 1 atau 2
+            // Hitung Pra Medical, Siap Kerja, dll. (sama seperti kode yang ada sebelumnya)
             $countPraMedical = ProsesCpmi::when($start, function ($query) use ($start) {
                 return $query->whereHas('pendaftaran', function ($query) use ($start) {
                     return $query->whereDate('tanggal_pra_medical', '>=', $start);
@@ -73,13 +73,12 @@ class LaporanController extends Controller
                     });
                 })
                 ->whereHas('pendaftaran', function ($query) use ($kantor) {
-                    $query->whereNotNull('tanggal_pra_medical') // Pastikan tanggal_pra_medical tidak null
-                        ->where('kantor_id', $kantor->id); // Filter berdasarkan kantor
+                    $query->whereNotNull('tanggal_pra_medical')
+                        ->where('kantor_id', $kantor->id);
                 })
-                ->whereIn('status_id', [1, 2]) // Hanya jika status_id 1 atau 2
+                ->whereIn('status_id', [1, 2])
                 ->count();
 
-            // Hitung Siap Kerja dari model ProsesCpmi (status_id ada di ProsesCpmi)
             $countSiapKerja = ProsesCpmi::when($start, function ($query) use ($start) {
                 return $query->whereDate('tglsiapkerja', '>=', $start);
             })
@@ -90,10 +89,9 @@ class LaporanController extends Controller
                 ->whereHas('pendaftaran', function ($query) use ($kantor) {
                     $query->where('kantor_id', $kantor->id);
                 })
-                ->whereIn('status_id', [1, 2]) // Hanya jika status_id 1 atau 2
+                ->whereIn('status_id', [1, 2])
                 ->count();
 
-            // Hitung ID BP2MI dari model ProsesCpmi (status_id ada di ProsesCpmi)
             $countBp2mi = ProsesCpmi::when($start, function ($query) use ($start) {
                 return $query->whereDate('tgl_bp2mi', '>=', $start);
             })
@@ -104,10 +102,9 @@ class LaporanController extends Controller
                 ->whereHas('pendaftaran', function ($query) use ($kantor) {
                     $query->where('kantor_id', $kantor->id);
                 })
-                ->whereIn('status_id', [1, 2]) // Hanya jika status_id 1 atau 2
+                ->whereIn('status_id', [1, 2])
                 ->count();
 
-            // Hitung Dapat Job dari model Marketing (status_id ada di ProsesCpmi)
             $countDapatJob = Marketing::when($start, function ($query) use ($start) {
                 return $query->whereDate('tgl_job', '>=', $start);
             })
@@ -119,11 +116,10 @@ class LaporanController extends Controller
                     $query->where('kantor_id', $kantor->id);
                 })
                 ->whereHas('prosesCpmi', function ($query) {
-                    $query->whereIn('status_id', [1, 2]); // Ambil status_id dari relasi ProsesCpmi
+                    $query->whereIn('status_id', [1, 2]);
                 })
                 ->count();
 
-            // Hitung Penerbangan dari model ProsesCpmi (tetap sama, tidak dipengaruhi status_id)
             $countPenerbangan = ProsesCpmi::when($start, function ($query) use ($start) {
                 return $query->whereDate('tanggal_penerbangan', '>=', $start);
             })
@@ -148,6 +144,28 @@ class LaporanController extends Controller
             $grandTotal += $totalPerKantor;
         }
 
+        // Data tambahan untuk tabel pengelompokan berdasarkan status_id
+        $dataByStatus = [];
+
+        foreach ($statuses as $status) {
+            $dataByStatus[$status->nama] = ProsesCpmi::when($start, function ($query) use ($start) {
+                    return $query->whereDate('created_at', '>=', $start);
+                })
+                ->when($end, function ($query) use ($end) {
+                    return $query->whereDate('created_at', '<=', $end);
+                })
+                ->where('status_id', $status->id)
+                ->with([
+                    'pendaftaran' => function ($query) {
+                        // Mengambil nama dan created_at dari kelas Pendaftaran
+                        $query->select('id', 'nama', 'created_at');
+                    },
+                    'tujuan', // Mengambil tujuan negara dari ProsesCpmi
+                    'marketing.agency' // Mengambil data Job (agency_id) dari kelas Marketing
+                ])
+                ->get();
+        }
+
         // Kirim data ke view laporan.blade.php
         return view('laporan', compact(
             'jumlahData',
@@ -161,16 +179,14 @@ class LaporanController extends Controller
             'jumlahPenerbangan',
             'kantors',
             'start',
-            'end'
+            'end',
+            'dataByStatus' // Tambahan data untuk tabel baru
         ));
     }
 
     public function generatePdf(Request $request)
     {
         // Sama dengan metode index, tetapi hasilnya di-generate sebagai PDF
-        // $start = $this->filters['startDate'] ?? null;
-        // $end = $this->filters['endDate'] ?? null;
-
         $start = $request->input('startDate');
         $end = $request->input('endDate');
 
@@ -288,6 +304,28 @@ class LaporanController extends Controller
             $grandTotal += $totalPerKantor;
         }
 
+        // Data tambahan untuk tabel pengelompokan berdasarkan status_id
+        $dataByStatus = [];
+
+        foreach ($statuses as $status) {
+            $dataByStatus[$status->nama] = ProsesCpmi::when($start, function ($query) use ($start) {
+                    return $query->whereDate('created_at', '>=', $start);
+                })
+                ->when($end, function ($query) use ($end) {
+                    return $query->whereDate('created_at', '<=', $end);
+                })
+                ->where('status_id', $status->id)
+                ->with([
+                    'pendaftaran' => function ($query) {
+                        // Mengambil nama dan created_at dari kelas Pendaftaran
+                        $query->select('id', 'nama', 'created_at');
+                    },
+                    'tujuan', // Mengambil tujuan negara dari ProsesCpmi
+                    'marketing.agency' // Mengambil data Job (agency_id) dari kelas Marketing
+                ])
+                ->get();
+        }
+
         $pdf = FacadePdf::loadView('laporan', compact(
             'jumlahData',
             'statuses',
@@ -300,7 +338,8 @@ class LaporanController extends Controller
             'jumlahPenerbangan',
             'kantors',
             'start',
-            'end'
+            'end',
+            'dataByStatus' // Tambahan data untuk tabel baru
         ));
 
         $appName = env('COMPANY_NAME', 'DefaultApp');

@@ -455,7 +455,7 @@ class PendaftaranSeeder extends Seeder
             // Select a village based on the selected district
             $village = Village::where('district_id', $district->id)->inRandomOrder()->first();
 
-            static $userId = 4; // Mulai user_id dari 4
+            static $userId = 7; // Mulai user_id dari 7
 
             // Insert data into the pendaftarans table
             DB::table('pendaftarans')->insert([
