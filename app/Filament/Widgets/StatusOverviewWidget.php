@@ -16,11 +16,18 @@ class StatusOverviewWidget extends BaseWidget
     function generateRandomChartData($count)
     {
         $data = [];
+        $startTime = strtotime('00:00'); // Mulai dari jam 00:00
+
         for ($i = 0; $i < $count; $i++) {
-            $data[] = rand(5, 96);
+            $hour = date('H:00', strtotime("+{$i} hours", $startTime)); // Mengatur format jam
+            $randomValue = rand(5, 96); // Menghasilkan angka acak antara 5 dan 96
+            $data[] = $randomValue; // Hanya mengambil nilai acak untuk chart
         }
+
         return $data;
     }
+
+
     protected int | string | array $columnSpan = 2;
 
 
