@@ -63,6 +63,10 @@
         .left-align td:nth-child(5) {
             text-align: left;
         }
+
+        .status-table td {
+            text-align: left;
+        }
     </style>
 </head>
 
@@ -74,7 +78,7 @@
             </td>
             <td width="33%" style="text-align: right;">
                 <div>
-                    <p><strong>Date:</strong> {{ date('d-m-Y H:i:s') }}</p>
+                    <p><strong>Tanggal Unduh:</strong> {{ date('d-m-Y H:i:s') }}</p>
                 </div>
             </td>
         </tr>
@@ -158,24 +162,26 @@
     </table>
 
     <!-- resources/views/kelompokan_berdasarkan_status.blade.php -->
-    <!-- resources/views/kelompokan_berdasarkan_status.blade.php -->
+    @foreach($kantors as $kantor)
+    <div class="page-break"></div> <!-- Page break per kantor -->
+
+    <!-- <h2 align="center">Kelompokan Berdasarkan Status</h2> -->
+    <h2 align="center">{{ $kantor->nama }}</h2> <!-- Nama kantor -->
+    <p style="text-align: right;"><strong>Tanggal Unduh:</strong> {{ date('d-m-Y H:i:s') }}</p>
+
+    <!-- Iterasi per status di dalam setiap kantor -->
     @foreach($statuses as $status)
-    <div class="page-break"></div> <!-- Page break per status -->
-
-    <h2 align="center">Kelompokan Berdasarkan Status</h2>
     <h3>{{ $status->nama }}</h3>
-
-    <!-- Jika status adalah 'Terbang', tambahkan kolom 'Penerbangan' -->
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Tanggal Daftar</th>
+                <th>Daftar</th>
                 <th>Nama</th>
-                <th>Negara Tujuan</th>
+                <th>Tujuan</th>
                 <th>Kantor</th>
                 <th>LPKS/BLK</th>
-                <th>Agency (Job)</th>
+                <th>Agency/Job</th>
                 @if($status->id == 3 || strtolower($status->nama) == 'terbang')
                 <th>Penerbangan</th>
                 @endif
@@ -183,27 +189,27 @@
         </thead>
         <tbody class="left-align">
             @php $no = 1; @endphp
-            @forelse($dataByStatus[$status->nama]->sortBy(fn($item) => $item->pendaftaran->created_at ?? now()) as $prosesCpmi)
+            @forelse($dataByStatus[$status->nama]->where('pendaftaran.kantor.nama', $kantor->nama)->sortBy(fn($item) => $item->pendaftaran->created_at ?? now()) as $prosesCpmi)
             <tr>
-                <td>{{ $no++ }}</td>
+                <td style="text-align: left;">{{ $no++ }}</td>
 
                 <!-- Format Tanggal Pendaftaran -->
-                <td>{{ isset($prosesCpmi->pendaftaran->created_at) ? \Carbon\Carbon::parse($prosesCpmi->pendaftaran->created_at)->format('d-m-Y') : '-' }}</td>
+                <td style="text-align: left;">{{ isset($prosesCpmi->pendaftaran->created_at) ? \Carbon\Carbon::parse($prosesCpmi->pendaftaran->created_at)->format('d-m-Y') : '-' }}</td>
 
                 <!-- Nama Pendaftar -->
-                <td>{{ $prosesCpmi->pendaftaran->nama ?? '-' }}</td>
+                <td style="text-align: left;">{{ $prosesCpmi->pendaftaran->nama ?? '-' }}</td>
 
                 <!-- Negara Tujuan -->
-                <td>{{ $prosesCpmi->tujuan->nama ?? '-' }}</td>
+                <td style="text-align: left;">{{ $prosesCpmi->tujuan->nama ?? '-' }}</td>
 
                 <!-- Negara Kantor -->
-                <td>{{ $prosesCpmi->pendaftaran->kantor->nama ?? '-' }}</td>
+                <td style="text-align: left;">{{ $prosesCpmi->pendaftaran->kantor->nama ?? '-' }}</td>
 
                 <!-- Negara Pelatihan -->
-                <td>{{ $prosesCpmi->pelatihan->nama ?? '-' }}</td>
+                <td style="text-align: left;">{{ $prosesCpmi->pelatihan->nama ?? '-' }}</td>
 
                 <!-- Iterasi jika relasi marketing hasMany -->
-                <td>
+                <td style="text-align: left;">
                     @foreach($prosesCpmi->pendaftaran->marketing as $marketing)
                     {{ $marketing->agency->nama ?? '-' }} <br>
                     @endforeach
@@ -211,17 +217,19 @@
 
                 <!-- Tampilkan kolom Penerbangan hanya jika status 'Terbang' -->
                 @if($status->id == 3 || strtolower($status->nama) == 'terbang')
-                <td>{{ isset($prosesCpmi->tanggal_penerbangan) ? \Carbon\Carbon::parse($prosesCpmi->tanggal_penerbangan)->format('d-m-Y') : '-' }}</td>
+                <td style="text-align: left;">{{ isset($prosesCpmi->tanggal_penerbangan) ? \Carbon\Carbon::parse($prosesCpmi->tanggal_penerbangan)->format('d-m-Y') : '-' }}</td>
                 @endif
             </tr>
             @empty
             <tr>
-                <td colspan="{{ $status->id == 3 || strtolower($status->nama) == 'terbang' ? 6 : 5 }}" align="center">Tidak ada data untuk status ini.</td>
+                <td colspan="{{ $status->id == 3 || strtolower($status->nama) == 'terbang' ? 6 : 5 }}" style="text-align: left;">Tidak ada data {{ $kantor->nama }}.</td>
             </tr>
             @endforelse
         </tbody>
     </table>
     @endforeach
+    @endforeach
+
 
 
 </body>
