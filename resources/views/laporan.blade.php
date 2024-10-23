@@ -4,9 +4,11 @@
 <head>
     <meta charset="utf-8">
     <title>Laporan {{ env('COMPANY_NAME') }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 10px;
             text-transform: uppercase;
             margin: 3px;
