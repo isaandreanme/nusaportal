@@ -31,13 +31,13 @@ class ListMarketings extends ListRecords
     public function getTabs(): array
     {
         return [
-            'NON JOB' => Tab::make('NON JOB')
+            'NON JOB' => Tab::make('NONJOB')
                 ->badge(Marketing::query()->where('get_job', '0')->count())
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('get_job', '0')),
-            'DAPAT JOB' => Tab::make('DAPAT JOB')
+            'DAPAT JOB' => Tab::make('DAPATJOB')
                 ->badge(Marketing::query()->where('get_job', '1')->count())
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('get_job', '1')),
-            'ALL BIODATA' => Tab::make('ALL BIODATA')
+            'SEMUA' => Tab::make('SEMUA')
                 ->icon('heroicon-m-clipboard-document-list')
                 ->badge(Marketing::query()->count()),
         ];

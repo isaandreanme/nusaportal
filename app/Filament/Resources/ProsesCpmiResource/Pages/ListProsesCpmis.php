@@ -30,13 +30,13 @@ class ListProsesCpmis extends ListRecords
     public function getTabs(): array
     {
         return [
-            'ALL' => Tab::make('ALL PROSES')
+            'ALL' => Tab::make('SEMUA')
                 ->icon('heroicon-o-arrow-path-rounded-square')
                 ->badge(ProsesCpmi::query()->count()),
             'BARU' => Tab::make('BARU')
                 ->badge(ProsesCpmi::query()->where('status_id', '1')->count())
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('status_id', '1')),
-            'ON PROSES' => Tab::make('ON PROSES')
+            'ON PROSES' => Tab::make('ONPROSES')
                 ->badge(ProsesCpmi::query()->where('status_id', '2')->count())
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('status_id', '2')),
             'TERBANG' => Tab::make('TERBANG')

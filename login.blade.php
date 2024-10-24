@@ -23,9 +23,9 @@
             <h3 class="text-sm font-semibold text-center" style="color: #09b8a7; text-transform: uppercase;">Masuk Sebagai</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button type="button" onclick="autofillLogin('admin@gmail.com', 'password')" class="autofill-btn">Admin</button>
-                <button type="button" onclick="autofillLogin('pendaftaran@gmail.com', 'password')" class="autofill-btn">Petugas Pendaftaran</button>
-                <button type="button" onclick="autofillLogin('prosescpmi@gmail.com', 'password')" class="autofill-btn">Petugas Proses</button>
-                <button type="button" onclick="autofillLogin('marketing@gmail.com', 'password')" class="autofill-btn">Petugas Marketing</button>
+                <button type="button" onclick="autofillLogin('pendaftaran@gmail.com', 'password')" class="autofill-btn">Staff Pendaftaran</button>
+                <button type="button" onclick="autofillLogin('prosescpmi@gmail.com', 'password')" class="autofill-btn">Staff Proses</button>
+                <button type="button" onclick="autofillLogin('marketing@gmail.com', 'password')" class="autofill-btn">Staff Marketing</button>
                 <br>
                 <button type="button" onclick="autofillLogin('agency@gmail.com', 'password')" class="autofill-btn">Agency</button>
                 <button type="button" onclick="autofillLogin('cpmi@gmail.com', 'password')" class="autofill-btn">CPMI</button>
