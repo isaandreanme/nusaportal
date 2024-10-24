@@ -330,7 +330,27 @@
             margin-top: 20px;
             flex-wrap: wrap;
             /* Membuat logo dapat berbaris pada layar kecil */
+
         }
+
+        .logosx {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            background-color: #f9fafb;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 1200px;
+            /* Sesuaikan dengan lebar konten utama */
+            margin: 0 auto;
+            /* Untuk membuatnya berada di tengah */
+            width: 100%;
+            /* Agar menyesuaikan dengan lebar konten utama */
+        }
+
 
         .logo {
             width: 200px;
@@ -598,7 +618,7 @@
     <div class="title-line">
         <span class="title-text">Sinkronisasi</span>
     </div>
-    <div class="logos">
+    <div class="logosx">
         <img src="images/bp2mi.png" alt="BP2MI" class="logo no-hover">
         <img src="images/kemnaker.png" alt="Kemnaker" class="logo no-hover">
         <img src="images/siapkerja.svg" alt="Siap Kerja" class="logo no-hover">
@@ -662,6 +682,7 @@
         <img src="images/ujk/2.png" alt="UJK" class="logo no-hover" style="height: 50px; width: auto;">
         <!-- <img src="images/plus.svg" class="logo no-hover" style="height: 20px; width: auto;"> -->
     </div>
+
     <br>
     <ul class="flex justify-center space-x-6 font-semibold text-sm text-[#09b8a7]">
         <li><a href="#company" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
