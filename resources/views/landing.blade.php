@@ -96,18 +96,49 @@
 
         /* Untuk layar mobile (max-width 768px), posisinya relatif */
         .dark-mode-toggle {
-            position: relative;
+            position: fixed;
+            /* Tetap di posisi yang sama di semua perangkat */
+            left: 20px;
+            /* Atur jarak dari kiri */
+            bottom: 20px;
+            /* Atur jarak dari bawah */
+            z-index: 1000;
+            /* Pastikan di atas elemen lain */
+            cursor: pointer;
+            /* Menunjukkan bahwa ini bisa diklik */
+
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Latar belakang gelap dengan transparansi */
+            color: white;
+            /* Warna teks putih */
+            width: 50px;
+            /* Atur lebar */
+            height: 50px;
+            /* Atur tinggi */
+            border-radius: 50%;
+            /* Membuat tombol menjadi lingkaran */
+            display: flex;
+            /* Menggunakan flexbox untuk menyelaraskan konten */
+            align-items: center;
+            /* Menyelaraskan vertikal */
+            justify-content: center;
+            /* Menyelaraskan horizontal */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            /* Efek bayangan */
+            transition: background-color 0.3s;
+            /* Transisi halus untuk perubahan warna */
         }
 
-        /* Untuk layar besar (min-width 768px), tetap fixed di pojok */
-        @media (min-width: 768px) {
-            .dark-mode-toggle {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 1000;
-            }
+        .dark-mode-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+            /* Latar belakang lebih terang saat hover */
+            color: black;
+            /* Ubah warna teks menjadi hitam saat hover */
         }
+
+
+
+
 
         .menulogin {
             color: #09b8a7;
