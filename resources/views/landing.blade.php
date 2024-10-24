@@ -32,6 +32,25 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <style>
+        .menulogin {
+            color: #09b8a7;
+            /* Warna yang diminta */
+            text-transform: uppercase;
+            /* Huruf kapital */
+            text-align: center;
+            /* Teks rata tengah */
+            font-size: 0.875rem;
+            /* Ukuran font kecil (Tailwind's 'text-sm') */
+            padding: 0.5rem;
+            /* Menambahkan padding untuk box */
+            border: 1px solid #09b8a7;
+            /* Border untuk membuat box */
+            border-radius: 0.375rem;
+            /* Opsional: sudut melengkung */
+            background-color: #f0fdfa;
+            /* Opsional: warna background yang cerah */
+        }
+
         .circle-img {
             width: 100px;
             height: 100px;
@@ -363,6 +382,16 @@
                         data-modal="modal-4">INFORMAL</a></li>
                 <li><a href="#contact" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
                         data-modal="modal-5">KONTAK</a></li>
+                <br>
+                <li>
+                    <a href="/admin" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN STAFF</a>
+                </li>
+                <li>
+                    <a href="/admin/workers" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN AGENCY</a>
+                </li>
+                <li>
+                    <a href="/admin/proses" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN CPMI</a>
+                </li>
             </ul>
 
             <!-- Tombol Menu Mobile -->
@@ -389,9 +418,40 @@
                     data-modal="modal-4">INFORMAL</a></li>
             <li><a href="#contact" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
                     data-modal="modal-5">KONTAK</a></li>
+            <br>
+            <li>
+                <a href="/admin" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN STAFF</a>
+            </li>
+            <li>
+                <a href="/admin/workers" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN AGENCY</a>
+            </li>
+            <li>
+                <a href="/admin/proses" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN CPMI</a>
+            </li>
         </ul>
+        <!-- Breadcrumb Menu -->
+        <!-- <div class="bg-white p-4 mt-2 container mx-auto">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex space-x-2 text-sm text-gray-500">
+                    <li>
+                        <a href="#" class="hover:text-[#09b8a7] transition duration-300 ease-in-out">Resmi</a>
+                    </li>
+                    <li>
+                        <span class="mx-2">/</span>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:text-[#09b8a7] transition duration-300 ease-in-out">Aman</a>
+                    </li>
+                    <li>
+                        <span class="mx-2">/</span>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:text-[#09b8a7] transition duration-300 ease-in-out">Proses Cepat</a>
+                    </li>
+                </ol>
+            </nav>
+        </div> -->
     </header>
-
 
     <!-- Konten Utama -->
     <main class="container px-4 py-12 mx-auto fade-in">
@@ -863,6 +923,19 @@
 
                 <!-- Tautan Navigasi -->
                 <ul class="hidden space-x-6 text-sm font-semibold text-white md:flex">
+                    <!-- <li><a href="/" class="hover:text-[#09b8a7] transition duration-300 ease-in-out">BERANDA</a>
+                    </li>
+                    <li><a href="#company" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
+                            data-modal="modal-1">PERUSAHAAN</a></li>
+                    <li><a href="#services" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
+                            data-modal="modal-3">FORMAL</a></li>
+                    <li><a href="#projects" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
+                            data-modal="modal-4">INFORMAL</a></li>
+                    <li><a href="#contact" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
+                            data-modal="modal-5">KONTAK</a></li> -->
+                </ul>
+
+                <ul class="hidden space-x-6 text-sm font-semibold text-white md:flex">
                     <li><a href="/" class="hover:text-[#09b8a7] transition duration-300 ease-in-out">BERANDA</a>
                     </li>
                     <li><a href="#company" class="hover:text-[#09b8a7] transition duration-300 ease-in-out"
@@ -876,11 +949,18 @@
                 </ul>
 
                 <!-- Tautan Internasional -->
-                <ul class="flex justify-center space-x-6 text-sm md:justify-start">
-                    <li><a href="/admin" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN STAFF</a></li>
-                    <li><a href="/admin/workers" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN AGENCY</a></li>
-                    <li><a href="/admin/proses" class="transition duration-300 ease-in-out hover:text-gray-300">LOGIN CPMI</a></li>
-                </ul>
+                <!-- <ul class="flex justify-center space-x-6 text-sm md:justify-start"> -->
+                    <!-- <li>
+                        <a href="/admin" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN STAFF</a>
+                    </li>
+                    <li>
+                        <a href="/admin/workers" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN AGENCY</a>
+                    </li>
+                    <li>
+                        <a href="/admin/proses" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN CPMI</a>
+                    </li> -->
+                <!-- </ul> -->
+
 
 
                 {{-- <div id="google_translate_element" class="translate-button"></div> --}}
