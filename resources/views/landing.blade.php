@@ -534,7 +534,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="dark-mode-toggle">
+            <div class="dark-mode-toggle" translate="no">
                 <span id="dark-mode-icon" class="material-symbols-outlined text-4xl">dark_mode</span>
             </div>
         </nav>
