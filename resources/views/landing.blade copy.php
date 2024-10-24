@@ -25,12 +25,6 @@
     <!-- Favicon -->
     <link rel="icon" href="/images/favicon.svg" type="image/x-icon">
 
-    <!-- Link ke Material Icons untuk dark/light mode -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode,light_mode" />
-
-
-
     <!-- Link ke Google Font Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
@@ -38,77 +32,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <style>
-        /* Style untuk dark mode */
-        .dark {
-            background-color: #1a202c;
-            color: #f0fdfa;
-        }
-
-        .dark body {
-            background-color: #1a202c;
-            color: #f0fdfa;
-        }
-
-        .dark header {
-            background-color: #2d3748;
-        }
-
-        .dark .bg-white {
-            background-color: #2d3748;
-        }
-
-        .dark .text-38b2ac {
-            color: #38b2ac;
-        }
-
-
-        .dark .bg-gray-800 {
-            background-color: #1a202c;
-        }
-
-        .dark .modal-content {
-            background-color: #2d3748;
-            color: #f0fdfa;
-        }
-
-        .dark .text-white {
-            color: #f0fdfa;
-        }
-
-        /* Menambahkan dark mode untuk dropdown menu */
-        .dark #mobile-menu {
-            background-color: #2d3748;
-            color: #f0fdfa;
-        }
-
-        /* Button dark mode */
-        .dark-mode-toggle {
-            cursor: pointer;
-        }
-
-        /* Flex container for mobile menu button and dark mode toggle */
-        .flex.items-center.space-x-4 {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        /* Untuk layar mobile (max-width 768px), posisinya relatif */
-        .dark-mode-toggle {
-            position: relative;
-        }
-
-        /* Untuk layar besar (min-width 768px), tetap fixed di pojok */
-        @media (min-width: 768px) {
-            .dark-mode-toggle {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 1000;
-            }
-        }
-
         .menulogin {
             color: #09b8a7;
             /* Warna yang diminta */
@@ -190,7 +113,7 @@
             align-items: center;
             justify-content: center;
             background-color: #ffffff;
-            background-color: rgba(0, 0, 0, 0.8);
+            /* background-color: rgba(0, 0, 0, 0.8); */
             /* Background hitam transparan */
             z-index: 999;
             opacity: 0;
@@ -227,14 +150,13 @@
             padding: 10px 15px;
             border: none;
             border-radius: 10px;
+            /* Membuat tombol close juga melengkung */
             cursor: pointer;
             position: absolute;
             top: 20px;
-            left: 20px;
-            /* Ganti dari right ke left */
+            right: 20px;
             z-index: 1000;
         }
-
 
 
         /* Aturan umum untuk efek hover pada layar desktop */
@@ -449,7 +371,6 @@
                 <h1 class=" text-lg font-bold md:flex" translate="no">{{ env('COMPANY_NAME') }}</h1>
             </div>
 
-
             <!-- Menu Navigasi Desktop -->
             <ul class="hidden md:flex space-x-6 font-semibold text-sm text-[#09b8a7]">
                 <li><a href="/" class="hover:text-[#09b8a7] transition duration-300 ease-in-out">BERANDA</a></li>
@@ -483,9 +404,6 @@
                     </svg>
                 </button>
             </div>
-            <div class="dark-mode-toggle">
-                <span id="dark-mode-icon" class="material-symbols-outlined text-4xl">dark_mode</span>
-            </div>
         </nav>
 
         <!-- Menu Dropdown Mobile -->
@@ -511,7 +429,6 @@
                 <a href="/admin/proses" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN CPMI</a>
             </li>
         </ul>
-
         <!-- Breadcrumb Menu -->
         <!-- <div class="bg-white p-4 mt-2 container mx-auto">
             <nav aria-label="Breadcrumb">
@@ -655,12 +572,12 @@
     </div>
     <br>
     <div class="logos">
-        <!-- <img src="images/agency/1.png" class="logo no-hover" style="height: 30px; width: auto;"> -->
+        <img src="images/agency/1.png" class="logo no-hover" style="height: 30px; width: auto;">
         <img src="images/agency/2.png" class="logo no-hover" style="height: 30px; width: auto;">
         <img src="images/agency/3.png" class="logo no-hover" style="height: 30px; width: auto;">
         <img src="images/ujk/1.png" alt="UJK" class="logo no-hover" style="height: 50px; width: auto;">
         <img src="images/ujk/2.png" alt="UJK" class="logo no-hover" style="height: 50px; width: auto;">
-        <!-- <img src="images/plus.svg" class="logo no-hover" style="height: 20px; width: auto;"> -->
+        <img src="images/plus.svg" class="logo no-hover" style="height: 20px; width: auto;">
     </div>
     <br>
     <ul class="flex justify-center space-x-6 font-semibold text-sm text-[#09b8a7]">
@@ -1033,7 +950,7 @@
 
                 <!-- Tautan Internasional -->
                 <!-- <ul class="flex justify-center space-x-6 text-sm md:justify-start"> -->
-                <!-- <li>
+                    <!-- <li>
                         <a href="/admin" class="menulogin transition duration-300 ease-in-out hover:text-gray-300">LOGIN STAFF</a>
                     </li>
                     <li>
@@ -1154,31 +1071,6 @@
         }
     </style>
     <!-- Batas Tombol Translate -->
-    <!-- Script untuk dark mode toggle -->
-    <script>
-        const darkModeToggle = document.querySelector('.dark-mode-toggle');
-        const darkModeIcon = document.getElementById('dark-mode-icon');
-
-        // Check if the user has a saved theme preference
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-            darkModeIcon.textContent = 'light_mode';
-        } else {
-            darkModeIcon.textContent = 'dark_mode'; // Ensure default icon is correct for light mode
-        }
-
-        darkModeToggle.addEventListener('click', function() {
-            document.documentElement.classList.toggle('dark');
-            if (document.documentElement.classList.contains('dark')) {
-                darkModeIcon.textContent = 'light_mode';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                darkModeIcon.textContent = 'dark_mode';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    </script>
 </body>
 
 </html>
