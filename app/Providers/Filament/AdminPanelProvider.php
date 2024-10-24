@@ -110,11 +110,11 @@ class AdminPanelProvider extends PanelProvider
                 //-----------------------------------User Bukan Error------------
                 LightSwitchPlugin::make()
                     ->position(Alignment::TopCenter),
-                FilamentBackgroundsPlugin::make()
-                    ->imageProvider(
-                        MyImages::make()
-                            ->directory('images/backgrounds')
-                    ),
+                // FilamentBackgroundsPlugin::make()
+                //     ->imageProvider(
+                //         MyImages::make()
+                //             ->directory('images/backgrounds')
+                //     ),
                 FilamentUsersPlugin::make(),
                 FilamentShieldPlugin::make()
                     ->gridColumns([
